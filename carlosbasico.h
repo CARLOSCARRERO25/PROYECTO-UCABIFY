@@ -24,7 +24,7 @@ bool CodigoVerificar(struct Nodo *lista,int codigo){
     bool buleano=false;
         Nodo *aux=lista; 
     if(aux)
-         while(aux->next){
+        while(aux->next){
             if (aux->codigo=codigo)
             {
                 return buleano=true;
