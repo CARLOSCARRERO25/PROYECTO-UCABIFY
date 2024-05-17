@@ -40,17 +40,24 @@ void fArchivo_ImprimirContenido(){
     archivo.open("NombreArchivo");
     //mientras haya contenido en el archivo se tomara linea por linea el contenido
     while(getline(archivo,linea));{
+        
+
         texto=texto+linea"\n";
+        lista = Lista
     }
     cout<< texto << endl;
     archivo.close();
 }
 
-void fArchivo_Guardar(){
+void fArchivo_Guardar(string texto){
     ofstream archivo("NombreArchivo");
     archivo.open("NombreArchivo");
+
     archivo<< /*TEXTOO AHH*/ ;
+
     archivo.close;
+
+
 }
 
 void fArchivo_CopiarContenido(){

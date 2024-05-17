@@ -2,7 +2,9 @@
 #include "LibreriaUsuarios.h"
 #include "LibreriaCanciones.h"
 #include "LibreriaHistorial.h"
+#include "carlosArchivos.h"
 using namespace std;
+
 
 void GenericMsg(int a);
 PtrCanciones ListaCanciones= NULL;
