@@ -143,6 +143,7 @@ int main(){
                 case 1: //Agregar canciones (faltan validaciones y generar el codigo identificador)
                     DatosCanciones = SolicitarDatosCanciones();
                     AgregarCancion(ListaCanciones, CrearNodoCanciones(12345,DatosCanciones->Nombre_Cancion,DatosCanciones->Artista, DatosCanciones->Genero,DatosCanciones->Year));
+                    fArchivo_MeterEnArchivoCanciones(ListaCanciones);
                     break;
                 case 2: //Eliminar Canciones (Faltan validaciones mas especificas)
                     if(ListaCanciones==NULL){
