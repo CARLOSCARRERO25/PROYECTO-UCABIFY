@@ -44,6 +44,16 @@ PtrCanciones SolicitarDatosCanciones(){
     return auxDatos;
 }
 
+bool ValidarCodigoCanciones(PtrCanciones Lista, int Codigo){
+    PtrCanciones aux = Lista;
+    while(aux!=NULL){
+        if(Codigo==aux->Identificador)
+            return 1;
+        aux=aux->Next;
+    }
+    return 0;
+}
+
 PtrCanciones BuscarCancion(PtrCanciones Lista, int Posicion){
     PtrCanciones aux = Lista;
     for(int i=1; i!=Posicion; i++)

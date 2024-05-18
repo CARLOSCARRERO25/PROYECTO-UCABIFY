@@ -53,6 +53,18 @@ PtrUsuarios SolicitarDatos(){
     return auxDatos;
 }
 
+
+bool ValidarCodigoUs(PtrUsuarios Lista,int Codigo){
+    PtrUsuarios aux = Lista;
+    while(aux!=NULL){
+        if(aux->Codigo_Identificador == Codigo)
+            return 1;
+        aux=aux->Next;
+    }
+    return 0;
+}
+    
+
 PtrUsuarios CrearNodoUsuarios(int Codigo, string Nombre, string Correo, short Edad, string Pass, string Pais){
     PtrUsuarios Aux = new Usuarios;
     Aux->Codigo_Identificador= Codigo;

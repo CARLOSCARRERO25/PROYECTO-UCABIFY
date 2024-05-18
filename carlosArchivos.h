@@ -81,7 +81,7 @@ void fArchivo_LeerCanciones(PtrCanciones &lista){
 
 void fArchivo_MeterEnArchivoCanciones(PtrCanciones Lista){
     ofstream archivo;
-    archivo.open("NombreArchivo",ios::out);
+    archivo.open("CancionesArchivo.txt",ios::out);
 
     while (Lista){
         archivo<<Lista->Identificador<<"\t";
@@ -95,17 +95,17 @@ void fArchivo_MeterEnArchivoCanciones(PtrCanciones Lista){
     archivo.close();
 }
 
-void fArchivo_MeterEnArchivoUsuario(PtrUsuarios &lista){
+void fArchivo_MeterEnArchivoUsuario(PtrUsuarios Lista){
     ofstream archivo;
-    archivo.open("UsuarioArchivo",ios::out);
+    archivo.open("UsuarioArchivo.txt",ios::out);
 
     while (Lista){
         archivo<<Lista->Codigo_Identificador<<"\t";
         archivo<<Lista->Nombre_Usuario<<"\t";
         archivo<<Lista->Correo<<"\t";
-        archivo<<Lista->edad<<"\t";
+        archivo<<Lista->Edad<<"\t";
         archivo<<Lista->Password<<"\t";
-        archivo<<Lista->pais<<"\n";
+        archivo<<Lista->Pais<<"\n";
         
         Lista=Lista->Next;
     }
@@ -113,22 +113,22 @@ void fArchivo_MeterEnArchivoUsuario(PtrUsuarios &lista){
 }
 
 void fArchivo_MeterEnHistorial(PtrUsuarios lista){
-    PtrUsuarios *UsuLista=lista;
-    PtrCanciones *CanLista;
     ofstream archivo;
-    archivo.open("UsuarioArchivo",ios::out);
+    PtrUsuarios UsuLista=lista;
+    PtrCanciones CanLista;
+    archivo.open("UsuarioHistorialArchivo.txt",ios::out);
     while(UsuLista){
-
-        archivo<<UsuLista->codigo <<"/ ";
+        archivo<<UsuLista->Codigo_Identificador<<'/';
         CanLista=UsuLista->PtrHistorial;
 
         while (CanLista){
             archivo<<CanLista->Identificador<<'-';
             CanLista=CanLista->Next;
         }   
-            archivo<<"\n";
-    UsuLista=UsuLista->Next;
-    }   archivo.close();
+        archivo<<"\n";
+        UsuLista=UsuLista->Next;
+    }   
+    archivo.close();
 }
 
 
@@ -154,7 +154,7 @@ void fArchivoGuardadoUsuario(PtrUsuarios lista){
         UsuAux=UsuAux->Next;
     }
 //
-    archivolinea<<linea;
+    archivo<<linea;
     archivo.close();
 }
 #endif

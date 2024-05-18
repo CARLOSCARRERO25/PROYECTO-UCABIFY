@@ -6,6 +6,12 @@
 #include "carlosArchivos.h"
 using namespace std;
 
+int GenerarCodigo(){
+    srand(time(NULL));
+    int num = (10000 + rand() % (99999 + 1 - 10000));
+    return num;
+}
+
 void GenericMsg(int a);
 PtrCanciones ListaCanciones= NULL;
 PtrUsuarios ListaUsuarios = NULL;
@@ -14,6 +20,8 @@ int main(){
     PtrUsuarios Datos;
     PtrCanciones DatosCanciones;
     string ValidarOpcion, Seleccion1, Seleccion2;
+    int Codigo;
+
     do{
         do{
             GenericMsg(1);
@@ -35,7 +43,12 @@ int main(){
                 {
                 case 1: //Agregar Usuarios (Faltan validaciones y generar el codigo aleatorio)
                     Datos = SolicitarDatos();
-                    AgregarUsuario(ListaUsuarios,CrearNodoUsuarios(0001,Datos->Nombre_Usuario, Datos->Correo, Datos->Edad, Datos->Password, Datos->Pais));
+                    do{
+                        Codigo = GenerarCodigo();
+                    }while(ValidarCodigoUs(ListaUsuarios, Codigo));
+
+                    AgregarUsuario(ListaUsuarios,CrearNodoUsuarios(Codigo,Datos->Nombre_Usuario, Datos->Correo, Datos->Edad, Datos->Password, Datos->Pais));
+                    fArchivo_MeterEnArchivoUsuario(ListaUsuarios);
                     break;
                 case 2: //Eliminar Usuarios (Faltan validaciones mas especifcas)
                     if(ListaUsuarios==NULL){
@@ -47,6 +60,7 @@ int main(){
                         int eleccion;
                         cin>>eleccion;
                         EliminarUsuario(ListaUsuarios, eleccion);
+                        fArchivo_MeterEnArchivoUsuario(ListaUsuarios);
                     }
                     break;
                 case 3: //Gestion de historial de usuarios
@@ -122,7 +136,6 @@ int main(){
                         cout<<"la lista esta vacia\n";
                     else
                         ImprimirListaUsuarios(ListaUsuarios);
-                    
                     system("pause");
                     break;
                 default:
@@ -142,7 +155,11 @@ int main(){
                 {
                 case 1: //Agregar canciones (faltan validaciones y generar el codigo identificador)
                     DatosCanciones = SolicitarDatosCanciones();
-                    AgregarCancion(ListaCanciones, CrearNodoCanciones(12345,DatosCanciones->Nombre_Cancion,DatosCanciones->Artista, DatosCanciones->Genero,DatosCanciones->Year));
+                    do{
+                        Codigo = GenerarCodigo();
+                    }while(ValidarCodigoCanciones(ListaCanciones, Codigo));
+                    
+                    AgregarCancion(ListaCanciones, CrearNodoCanciones(Codigo,DatosCanciones->Nombre_Cancion,DatosCanciones->Artista, DatosCanciones->Genero,DatosCanciones->Year));
                     fArchivo_MeterEnArchivoCanciones(ListaCanciones);
                     break;
                 case 2: //Eliminar Canciones (Faltan validaciones mas especificas)
@@ -198,6 +215,7 @@ int main(){
             cin>>Seleccion2;
 
             AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2));
+            fArchivo_MeterEnHistorial(ListaUsuarios);
             break;
         default:
             break;
