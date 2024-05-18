@@ -4,7 +4,7 @@
 #include "LibreriaHistorial.h"
 #include "validaciones.h"
 using namespace std;
-//te quiero mucho carlitos
+
 void GenericMsg(int a);
 PtrCanciones ListaCanciones= NULL;
 PtrUsuarios ListaUsuarios = NULL;
