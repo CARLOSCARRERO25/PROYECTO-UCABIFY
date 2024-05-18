@@ -1,6 +1,7 @@
 #ifndef LIBRERIA_USUARIOS
 #define LIBRERIA_USUARIOS
 #include "LibreriaCanciones.h"
+#include "validaciones.h"
 #include <iostream>
 using namespace std;
 
@@ -25,22 +26,29 @@ int contadorUsuarios=0;
 
 PtrUsuarios SolicitarDatos(){
     PtrUsuarios auxDatos = new Usuarios;
+    string edad;
 
-    cout<<"Ingrese los datos datos que le seran solicitados a continuacion\n";
+    cout<<"Ingrese los datos datos que le seran solicitados a continuacion\n\n";
+    cin.ignore();
     cout<<"Ingrese su Nombre de usuario: \n";
-    cin>>auxDatos->Nombre_Usuario;
+    getline(cin,auxDatos->Nombre_Usuario);
 
-    cout<<"\nIngrese su edad:\n";
-    cin>>auxDatos->Edad;
-
+    do{
+        cout<<"Ingrese su edad:\n";
+        cin>>edad;
+        MsgdeError(1, edad);
+    }while(!esNumero(edad));
+    auxDatos->Edad=stoi(edad);
+    
+    cin.ignore();
     cout<<"\nIngrese su pais de origen\n";
-    cin>>auxDatos->Pais;
+    getline(cin,auxDatos->Pais);
 
     cout<<"\nIngrese el correo de su usuario\n";
-    cin>>auxDatos->Correo;
+    getline(cin, auxDatos->Correo);
 
     cout<<"\nIngrese una contrasena:\n";
-    cin>>auxDatos->Password;
+    getline(cin,auxDatos->Password);
 
     return auxDatos;
 }
@@ -97,6 +105,7 @@ PtrUsuarios BuscarUsuario(PtrUsuarios &lista, int Posicion){
 }
 
 void ImprimirListaUsuarios(PtrUsuarios Lista){
+    cout<<"La lista de usuarios de UCABIFY es: \n";
     for(int i=1; i<=contadorUsuarios; i++){
         cout<<i<<" )\t";
         cout<<Lista->Codigo_Identificador<<"\t";

@@ -1,6 +1,7 @@
 #ifndef LIBRERIA_CANCIONES
 #define LIBRERIA_CANCIONES
 #include <iostream>
+#include "validaciones.h"
 
 using namespace std;
 
@@ -20,19 +21,26 @@ typedef Canciones *PtrCanciones;
 
 PtrCanciones SolicitarDatosCanciones(){
     PtrCanciones auxDatos = new Canciones;
+    string ano;
+    cin.ignore();
 
-    cout<<"Ingrese los datos datos que le seran solicitados a continuacion\n";
+    cout<<"Ingrese los datos datos que le seran solicitados a continuacion\n\n";
     cout<<"Ingrese su Nombre de la cancion: \n";
-    cin>>auxDatos->Nombre_Cancion;
+    getline(cin,auxDatos->Nombre_Cancion);
 
     cout<<"\nIngrese el nombre del artista:\n";
-    cin>>auxDatos->Artista;
+    getline(cin,auxDatos->Artista);
 
     cout<<"\nIngrese el genero de la cancion\n";
-    cin>>auxDatos->Genero;
+    getline(cin,auxDatos->Genero);
 
-    cout<<"\nIngrese el ano de lanzamiento\n";
-    cin>>auxDatos->Year;
+    do{
+        cout<<"\nIngrese el ano de lanzamiento\n";
+        getline(cin,ano);
+        MsgdeError(1, ano);
+    }while(!esNumero(ano));
+    auxDatos->Year=stoi(ano);
+
     return auxDatos;
 }
 
@@ -84,6 +92,7 @@ void EliminarCancion(PtrCanciones &lista, int Posicion){
 }
 
 void ImprimirListaCanciones(PtrCanciones Lista){
+    cout<<"La lista de canciones de UCABIFY es: \n";
     for(int i=1; i<=contadorCanciones; i++){
         cout<<i<<" )\t";
         cout<<Lista->Identificador<<"\t";
