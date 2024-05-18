@@ -14,36 +14,6 @@ using namespace std;
 
 
 
-
-
-void conversor_campos_canciones(PtrCanciones &lista,int conteo, string linea){
-int x;
-    switch (conteo)
-    {
-    case 1:
-        x=stoi(linea);
-        lista->Identificador=x;
-        break;
-
-    case 2:
-        lista->Nombre_Cancion =linea;
-        break;
-
-    case 3:
-        lista->Artista=linea;
-        break;
-    case 4:
-    lista->Genero=linea;break;
-    case 5:
-        x=stoi(linea);
-        lista->Year=x;
-        break;
-    default:
-        break;
-    }
-}
-
-
 void ArchivosEscribir(){
     ofstream archivo;
 
@@ -125,12 +95,49 @@ void fArchivo_MeterEnArchivoCanciones(PtrCanciones Lista){
     archivo.close();
 }
 
+void fArchivo_MeterEnArchivoUsuario(PtrUsuarios &lista){
+    ofstream archivo;
+    archivo.open("UsuarioArchivo",ios::out);
 
-void fArchivoLeerUsuario(PtrUsuarios &lista){
+    while (Lista){
+        archivo<<Lista->Codigo_Identificador<<"\t";
+        archivo<<Lista->Nombre_Usuario<<"\t";
+        archivo<<Lista->Correo<<"\t";
+        archivo<<Lista->edad<<"\t";
+        archivo<<Lista->Password<<"\t";
+        archivo<<Lista->pais<<"\n";
+        
+        Lista=Lista->Next;
+    }
+    archivo.close();
+}
+
+void fArchivo_MeterEnHistorial(PtrUsuarios &lista){
+    PtrUsuarios *UsuLista=lista;
+    PtrCanciones *CanLista;
+    ofstream archivo;
+    archivo.open("UsuarioArchivo",ios::out);
+    while(UsuLista){
+        while (CanLista){
+            archivo<<Lista-><<"\t";
+            archivo<<Lista-><<"\t";
+            archivo<<Lista-><<"\t";
+            archivo<<Lista-><<"\t";
+            archivo<<Lista-><<"\t";
+            archivo<<Lista-><<"\n";
+            
+            CanLista=CanLista->Next;
+        }   UsuLista=UsuLista->Next;
+        archivo.close();
+    }   
+}
+
+
+void fArchivoGuardadoUsuario(PtrUsuarios lista){
     string linea,linea2;
     PtrUsuarios UsuAux=lista;
     PtrCanciones CanAux;
-    ifstream archivo("ArchivoHistorial.txt");
+    ofstream archivo("ArchivoHistorial.txt");
     archivo.open("ArchivoHistorial.txt");
 
     CanAux= UsuAux->PtrHistorial;
@@ -148,7 +155,7 @@ void fArchivoLeerUsuario(PtrUsuarios &lista){
         UsuAux=UsuAux->Next;
     }
 //
-    archivo>>linea;
+    archivolinea<<linea;
     archivo.close();
 }
 #endif

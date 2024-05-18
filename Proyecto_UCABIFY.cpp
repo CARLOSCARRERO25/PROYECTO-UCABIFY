@@ -3,6 +3,7 @@
 #include "LibreriaCanciones.h"
 #include "LibreriaHistorial.h"
 #include "validaciones.h"
+#include "carlosArchivos.h"
 using namespace std;
 
 void GenericMsg(int a);
