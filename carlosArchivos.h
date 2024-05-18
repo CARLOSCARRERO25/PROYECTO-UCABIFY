@@ -82,9 +82,11 @@ void ArchivosEscribir(){
 void fArchivo_LeerCanciones(PtrCanciones &lista){
     ifstream archivo;
     Canciones *ptraux=lista;
-    string texto,linea,linea2;
-    int conteo=0;
+    canciones *ptraux2;
+    string texto,linea,linea2,nombre,Genero;
+    int conteo=0,x,Identificador,Year;
     char letra;
+
 
     archivo.open("NombreArchivo");
     //mientras haya contenido en el archivo se tomara linea por linea el contenido
@@ -96,19 +98,38 @@ void fArchivo_LeerCanciones(PtrCanciones &lista){
             linea2= linea2+letra;
 
             if(letra == '\t'){
-                conversor_campos_canciones(ptraux,conteo,linea2);
                 conteo++;
-                linea2="";
+                int x;
+
+            switch (conteo)
+            {   case 1:
+                    Identificador=stoi(linea2);
+                    break;
+
+                case 2:
+                    nombre=linea2;
+                    break;
+
+                case 3:
+                    Artista=linea2;
+                    break;
+                case 4:
+                    Genero=linea2;break;
+                case 5:
+                    Year=stoi(linea2);
+                    break;
+
+                default:
+                break;}
+
+            linea2="";
+            ptraux2=CrearNodoCanciones(Identificador,nombre,Artista,Genero,Year);
+                AgregarCancion(ptraux,ptraux2);
                 ptraux = ptraux->Next;
             }
         }
-
-        texto=texto+linea+"\n" ;
-        ptraux=ptraux->Next;
-
     }
 
-    cout<< texto << endl;
     archivo.close();
 }
 
