@@ -1,43 +1,18 @@
+#ifndef LIBRERIA_ARCHIVOS
+#define LIBRERIA_ARCHIVOS
 #include<iostream>
 #include<stdlib.h>
 #include<fstream>
-#include<LibreriaUsuarios.h>
+#include"LibreriaUsuarios.h"
 #define NombreArchivo "ARCHIVO_PROYECTO.txt"
-#include<LibreriaHistorial.h>
-#include<LibreriaCanciones.h>
+#include"LibreriaHistorial.h"
+#include"LibreriaCanciones.h"
 
 
 #define ComandoSalto "\r\n"
 using namespace std;
 
-struct Canciones{
-    int Identificador;
-    string Nombre_Cancion;
-    string Artista;
-    string Genero;
-    int Year;
-    int Contador_Reproducciones;
-    bool Like;
-    Canciones *Next;
 
-};
-typedef Canciones *PtrCanciones;
-Canciones Cancion;
-
-struct Usuarios{
-    int Codigo_Identificador;
-    string Nombre_Usuario;
-    string Correo;
-    short Edad;
-    string Password;
-    string Pais;
-    Canciones *PtrHistorial;
-    int ContadorHistorial;
-    Usuarios *Next;
-    
-};
-
-typedef Usuarios *PtrUsuarios;
 
 
 
@@ -81,9 +56,9 @@ void ArchivosEscribir(){
 
 void fArchivo_LeerCanciones(PtrCanciones &lista){
     ifstream archivo;
-    Canciones *ptraux=lista;
-    canciones *ptraux2;
-    string texto,linea,linea2,nombre,Genero;
+    PtrCanciones ptraux=lista;
+    PtrCanciones ptraux2;
+    string texto,linea,linea2,nombre,Genero, Artista;
     int conteo=0,x,Identificador,Year;
     char letra;
 
@@ -123,7 +98,7 @@ void fArchivo_LeerCanciones(PtrCanciones &lista){
                 break;}
 
             linea2="";
-            ptraux2=CrearNodoCanciones(Identificador,nombre,Artista,Genero,Year);
+            ptraux2 = CrearNodoCanciones(Identificador,nombre,Artista,Genero,Year);
                 AgregarCancion(ptraux,ptraux2);
                 ptraux = ptraux->Next;
             }
@@ -134,31 +109,20 @@ void fArchivo_LeerCanciones(PtrCanciones &lista){
 }
 
 
-void fArchivo_MeterEnArchivoCanciones(PtrCanciones &Lista){
-    ifstream archivo("NombreArchivo");
-    archivo.open("NombreArchivo");
-    string estrin;
-    string linea;
+void fArchivo_MeterEnArchivoCanciones(PtrCanciones Lista){
+    ofstream archivo;
+    archivo.open("NombreArchivo",ios::out);
 
-    while (Lista)
-    {
-
-    estrin=to_string(Lista->Identificador);
-    linea = linea + estrin;
-    linea = linea + Lista->Nombre_Cancion;
-    linea = linea + Lista->Artista;
-    linea = linea + Lista->Genero;
-    estrin = to_string	(Lista->Year);
-    linea = linea + estrin;
-    Lista=Lista->Next;
-
+    while (Lista){
+        archivo<<Lista->Identificador<<"\t";
+        archivo<<Lista->Nombre_Cancion<<"\t";
+        archivo<<Lista->Artista<<"\t";
+        archivo<<Lista->Genero<<"\t";
+        archivo<<Lista->Year<<"\t";
+        archivo<<Lista->Contador_Reproducciones<<"\n";
+        Lista=Lista->Next;
     }
-        
-        archivo>>linea;
-        
     archivo.close();
-
-
 }
 
 
@@ -187,6 +151,6 @@ void fArchivoLeerUsuario(PtrUsuarios &lista){
     archivo>>linea;
     archivo.close();
 }
-
+#endif
 
 
