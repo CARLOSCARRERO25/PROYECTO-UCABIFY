@@ -163,6 +163,7 @@ void fArchivoLeerUsuario(PtrUsuarios &lista){
         UsuAux=UsuAux->Next;
     }
 //
+    archivo>>linea;
     archivo.close();
 }
 
