@@ -112,24 +112,23 @@ void fArchivo_MeterEnArchivoUsuario(PtrUsuarios &lista){
     archivo.close();
 }
 
-void fArchivo_MeterEnHistorial(PtrUsuarios &lista){
+void fArchivo_MeterEnHistorial(PtrUsuarios lista){
     PtrUsuarios *UsuLista=lista;
     PtrCanciones *CanLista;
     ofstream archivo;
     archivo.open("UsuarioArchivo",ios::out);
     while(UsuLista){
+
+        archivo<<UsuLista->codigo <<"/ ";
+        CanLista=UsuLista->PtrHistorial;
+
         while (CanLista){
-            archivo<<Lista-><<"\t";
-            archivo<<Lista-><<"\t";
-            archivo<<Lista-><<"\t";
-            archivo<<Lista-><<"\t";
-            archivo<<Lista-><<"\t";
-            archivo<<Lista-><<"\n";
-            
+            archivo<<CanLista->Identificador<<'-';
             CanLista=CanLista->Next;
-        }   UsuLista=UsuLista->Next;
-        archivo.close();
-    }   
+        }   
+            archivo<<"\n";
+    UsuLista=UsuLista->Next;
+    }   archivo.close();
 }
 
 
@@ -161,3 +160,4 @@ void fArchivoGuardadoUsuario(PtrUsuarios lista){
 #endif
 
 
+//carlosArchivos.h
