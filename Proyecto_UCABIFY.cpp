@@ -54,7 +54,8 @@ int main(){
                 case 2: //Eliminar Usuarios (Faltan validaciones mas especifcas)
                     if(ListaUsuarios==NULL){
                         cout<<"La lista esta vacia; no hay elementos para eliminarm\n";
-                    }else{
+                        delay(2);
+                    }else{ 
                         do{
                             do{
                                 ImprimirListaUsuarios(ListaUsuarios);
@@ -82,17 +83,29 @@ int main(){
                         switch (stoi(ValidarOpcion))
                         {
                         case 1:
-                            do{
-                                do{  // IMPRIMIR HISTORIAL DE USUARIO SELECCIONADO
-                                    cout<<"Seleccione el usuario al cual desea revisarle el historial:\n";
-                                    ImprimirListaUsuarios(ListaUsuarios);
-                                    cout<<">> ";
-                                    cin>>ValidarOpcion;
-                                    MsgdeError(1, ValidarOpcion);
-                                }while(!esNumero(ValidarOpcion));
-                            }while(stoi(ValidarOpcion)<= 0 || stoi(ValidarOpcion)>contadorUsuarios);
-                            ImprimirHistorial(ListaUsuarios, stoi(ValidarOpcion));
-                            system("pause");
+                            if(!ListaUsuarios){
+                                GenericMsg(7);
+                                GenericMsg(8);
+                            }else{
+                                do{
+                                    do{  // IMPRIMIR HISTORIAL DE USUARIO SELECCIONADO
+                                        cout<<"Seleccione el usuario al cual desea revisarle el historial:\n";
+                                        ImprimirListaUsuarios(ListaUsuarios);
+                                        cout<<">> ";
+                                        cin>>ValidarOpcion;
+                                        MsgdeError(1, ValidarOpcion);
+                                    }while(!esNumero(ValidarOpcion));
+                                }while(stoi(ValidarOpcion)<= 0 || stoi(ValidarOpcion)>contadorUsuarios);
+                                
+                                if (BuscarUsuario(ListaUsuarios, stoi(ValidarOpcion))->ContadorHistorial==0)
+                                {
+                                    cout<<"El historial de este usuario esta vacio\n";
+                                    delay(2);
+                                }else{
+                                    ImprimirHistorial(ListaUsuarios, stoi(ValidarOpcion));
+                                    system("pause");   
+                                }
+                            }
                             break;
                         case 2:
                             do{
@@ -105,21 +118,21 @@ int main(){
                             switch (stoi(ValidarOpcion))
                             {
                             case 1:
-                                    do{//SELECCION 1 es el usuario buscado
-                                        cout<<"Seleccione el usuario al cual le desea eliminar un dato del historial\n";
-                                        ImprimirListaUsuarios(ListaUsuarios);
-                                        cout<<">> ";
-                                        cin>>Seleccion1;
-                                        MsgdeError(1, Seleccion1);
-                                    }while(!esNumero(Seleccion1));
+                                do{//SELECCION 1 es el usuario buscado
+                                    cout<<"Seleccione el usuario al cual le desea eliminar un dato del historial\n";
+                                    ImprimirListaUsuarios(ListaUsuarios);
+                                    cout<<">> ";
+                                    cin>>Seleccion1;
+                                    MsgdeError(1, Seleccion1);
+                                }while(!esNumero(Seleccion1));
                 
-                                    do{//SELECCION 2 ES LA CANCION QUE VOY A ELIMINAR
-                                        cout<<"Seleccione el dato que desea eliminar del usuario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->Nombre_Usuario<<"\n";
-                                        ImprimirHistorial(ListaUsuarios, stoi(Seleccion1));
-                                        cout<<">> ";
-                                        cin>>Seleccion2;
-                                        MsgdeError(1, Seleccion2);
-                                    }while(!esNumero(Seleccion2));
+                                do{//SELECCION 2 ES LA CANCION QUE VOY A ELIMINAR
+                                    cout<<"Seleccione el dato que desea eliminar del usuario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->Nombre_Usuario<<"\n";
+                                    ImprimirHistorial(ListaUsuarios, stoi(Seleccion1));
+                                    cout<<">> ";
+                                    cin>>Seleccion2;
+                                    MsgdeError(1, Seleccion2);
+                                }while(!esNumero(Seleccion2));
 
                                 EliminarHistorial(ListaUsuarios, stoi(Seleccion1), stoi(Seleccion2));
                                 fArchivo_MeterEnHistorial(ListaUsuarios);
@@ -294,6 +307,7 @@ void GenericMsg(int a){
         cout<<"( 4 ) Volver al menu anterior\n";
         break;
     case 4:
+        system("cls");
         cout<<"\t\tBienvenido a la lista de reproduccion de UCABIFY\n\n";
         cout<<"Seleccione el usuario que desea reproducir una cancion:\n";
         break;
@@ -308,15 +322,18 @@ void GenericMsg(int a){
         break;
     case 8:
         cout<<"intente de nuevo mas tarde\n";
-        system("pause");
+        delay(2);
+        system("cls");
         break;
     case 9:
+        system("cls");
         cout<<"\t\tMenu para gestionar el historial de los usuarios\n\n";
         cout<<"( 1 ) Ver historial de usuario\n";
         cout<<"( 2 ) Limpiar Historial\n";
         cout<<"( 3 ) Volver al menu anterior\n";
         break;
     case 10:
+        system("cls");
         cout<<"\t\tMenu para limpiar el historial, seleccione una opcion: \n";
         cout<<"( 1 ) Borrar un elemento del historial de un usuario\n";
         cout<<"( 2 ) Borrar todo el historial de un usuario\n";
