@@ -20,6 +20,7 @@ void AgregarHistorial(PtrUsuarios &ListaUsuarios, PtrCanciones ListaCanciones, i
     aux->ContadorHistorial++;
 }
 
+
 void EliminarHistorial(PtrUsuarios &Lista, int PosicionUS, int PosicionHistorial){
     PtrUsuarios aux = BuscarUsuario(Lista, PosicionUS);
     PtrCanciones aux2 = aux->PtrHistorial;
@@ -40,6 +41,7 @@ void ImprimirHistorial(PtrUsuarios ListaUsuarios, int Posicion){
     PtrUsuarios aux = BuscarUsuario(ListaUsuarios, Posicion);
     PtrCanciones aux2 = aux->PtrHistorial;
     cout<<"El Historial del Usuario "<<aux->Nombre_Usuario<<" es: \n";
+    cout<<" ID Usuario \t ID \t NOMBRE \t ARTISTA \t GENERO \t YEAR "<<endl;
     for(int i=1; i<=aux->ContadorHistorial; i++){
         cout<<i<<" )\t";
         cout<<aux2->Identificador<<"\t";

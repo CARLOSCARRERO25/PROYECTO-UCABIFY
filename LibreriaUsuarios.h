@@ -27,28 +27,36 @@ int contadorUsuarios=0;
 PtrUsuarios SolicitarDatos(){
     PtrUsuarios auxDatos = new Usuarios;
     string edad;
+    cout<<"--------------------------------------------------------------- \n";
 
     cout<<"Ingrese los datos datos que le seran solicitados a continuacion\n\n";
+    cout<<">> ";
     cin.ignore();
     cout<<"Ingrese su Nombre de usuario: \n";
     getline(cin,auxDatos->Nombre_Usuario);
 
     do{
         cout<<"Ingrese su edad:\n";
+        cout<<">> ";
         cin>>edad;
-        MsgdeError(1, edad);
+        MsgdeErrorF(1, edad);
     }while(!esNumero(edad));
-    auxDatos->Edad=stoi(edad);
+    auxDatos->Edad=short(stoi(edad));
     
     cin.ignore();
     cout<<"\nIngrese su pais de origen\n";
+    cout<<">> ";
     getline(cin,auxDatos->Pais);
 
     cout<<"\nIngrese el correo de su usuario\n";
+    cout<<">> ";
     getline(cin, auxDatos->Correo);
 
     cout<<"\nIngrese una contrasena:\n";
+    cout<<">> ";
     getline(cin,auxDatos->Password);
+
+    cout<<"--------------------------------------------------------------- \n";
 
     return auxDatos;
 }
@@ -116,8 +124,19 @@ PtrUsuarios BuscarUsuario(PtrUsuarios &lista, int Posicion){
     return aux;
 }
 
+int BuscarPosicionDeUsuario(PtrUsuarios Lista, int Codigo){
+    int i=1;
+    PtrUsuarios aux = Lista;
+    while(aux->Codigo_Identificador != Codigo){
+        i++;
+        aux=aux->Next;
+    }
+    return i;
+}
+
 void ImprimirListaUsuarios(PtrUsuarios Lista){
     cout<<"La lista de usuarios de UCABIFY es: \n";
+    cout<<"------------------------------------------------------------------------------------ \n";
     for(int i=1; i<=contadorUsuarios; i++){
         cout<<i<<" )\t";
         cout<<Lista->Codigo_Identificador<<"\t";
@@ -128,6 +147,7 @@ void ImprimirListaUsuarios(PtrUsuarios Lista){
         cout<<Lista->Pais<<"\n";
         Lista=Lista->Next;
     }
+        cout<<"------------------------------------------------------------------------------------ ";
     cout<<endl;
 }
 #endif

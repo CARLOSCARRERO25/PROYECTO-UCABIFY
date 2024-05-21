@@ -14,6 +14,7 @@ struct Canciones{
     string Genero;
     int Year;
     int Contador_Reproducciones;
+    int Contador_Likes;
     bool Like;
     Canciones *Next;
 };
@@ -23,23 +24,29 @@ PtrCanciones SolicitarDatosCanciones(){
     PtrCanciones auxDatos = new Canciones;
     string ano;
     cin.ignore();
+    cout<<"------------------------------------------------------------------- \n";
 
     cout<<"Ingrese los datos datos que le seran solicitados a continuacion\n\n";
     cout<<"Ingrese su Nombre de la cancion: \n";
+    cout<<">>";
     getline(cin,auxDatos->Nombre_Cancion);
 
     cout<<"\nIngrese el nombre del artista:\n";
+    cout<<">>";
     getline(cin,auxDatos->Artista);
 
     cout<<"\nIngrese el genero de la cancion\n";
+    cout<<">>";
     getline(cin,auxDatos->Genero);
 
     do{
         cout<<"\nIngrese el ano de lanzamiento\n";
+        cout<<">>";
         getline(cin,ano);
-        MsgdeError(1, ano);
+        MsgdeErrorF(1, ano);
     }while(!esNumero(ano));
     auxDatos->Year=stoi(ano);
+    cout<<"--------------------------------------------------------------- \n";
 
     return auxDatos;
 }
@@ -61,6 +68,16 @@ PtrCanciones BuscarCancion(PtrCanciones Lista, int Posicion){
     return aux;
 }
 
+int BuscarPosicionDeCancion(PtrCanciones Lista, int Codigo){
+    int i=1;
+    PtrCanciones aux = Lista;
+    while((aux->Identificador!= Codigo) && (aux->Next!=NULL)){
+        i++;
+        aux=aux->Next;
+    }
+    return i;
+}
+
 PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista, string genero, int ano){
     PtrCanciones aux= new Canciones;
     aux->Identificador = identificador;
@@ -69,6 +86,7 @@ PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista
     aux->Genero = genero;
     aux->Year= ano;
     aux->Contador_Reproducciones = 0;
+    aux->Contador_Likes=0;
     aux->Like = 0;
     aux->Next = NULL;
     return aux;
@@ -103,6 +121,10 @@ void EliminarCancion(PtrCanciones &lista, int Posicion){
 
 void ImprimirListaCanciones(PtrCanciones Lista){
     cout<<"La lista de canciones de UCABIFY es: \n";
+
+    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t YEAR "<<endl;
+    cout<<"--------------------------------------------------------------- \n";
+
     for(int i=1; i<=contadorCanciones; i++){
         cout<<i<<" )\t";
         cout<<Lista->Identificador<<"\t";
@@ -112,6 +134,8 @@ void ImprimirListaCanciones(PtrCanciones Lista){
         cout<<Lista->Year<<"\n";
         Lista=Lista->Next;
     }
+            cout<<"--------------------------------------------------------------- \n";
+
     cout<<endl;
 }
 

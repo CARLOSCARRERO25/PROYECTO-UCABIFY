@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <time.h>
+#include "LibreriaUsuarios.h"
 using namespace std;
 
 void delay(int secs) {
@@ -29,7 +30,7 @@ bool esNumero(string numeroString)
     }
 }
 
-void MsgdeError(int a, string op){
+void MsgdeErrorF(int a, string op){
     switch (a)
     {
     case (1):
@@ -38,9 +39,6 @@ void MsgdeError(int a, string op){
                 delay(2);
                 system("cls");
             }
-        break;
-    case(2):
-
         break;
     default:
         break;
