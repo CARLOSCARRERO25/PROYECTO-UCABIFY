@@ -36,47 +36,47 @@ string CopiarDato(string Linea, int &i){
 
 void CargarArchivoCanciones(PtrCanciones &Lista){
     int Identificador;
-    string Nombre_Cancion;
+    string NombreCancion;
     string Artista;
     string Genero;
-    int Year;
-    int Contador_Reproducciones;
-    int Contador_Likes;
+    int Anio;
+    int ContadorReproducciones;
+    int ContadorLikes;
     string Linea;
     ifstream archivo("CancionesArchivo.txt");
     
     while(getline(archivo,Linea)){
         int i=0;
         Identificador=stoi(CopiarDato(Linea,i));
-        Nombre_Cancion = CopiarDato(Linea,i);
+        NombreCancion = CopiarDato(Linea,i);
         Artista = CopiarDato(Linea,i);
         Genero = CopiarDato(Linea,i);
-        Year = stoi(CopiarDato(Linea,i));
+        Anio = stoi(CopiarDato(Linea,i));
 
-        AgregarCancion(Lista, CrearNodoCanciones(Identificador, Nombre_Cancion, Artista, Genero, Year));
+        AgregarCancion(Lista, CrearNodoCanciones(Identificador, NombreCancion, Artista, Genero, Anio));
     }
     archivo.close();
 }
 
 void CargarArchivoUsuarios(PtrUsuarios &Lista){
-    int Codigo_Identificador;
-    string Nombre_Usuario;
+    int CodigoIdentificador;
+    string NombreUsuario;
     string Correo;
     short Edad;
-    string Password;
+    string Contrasena;
     string Pais;
     string Linea;
     ifstream archivo("UsuarioArchivo.txt");
     
     while(getline(archivo,Linea)){
         int i=0;
-        Codigo_Identificador=stoi(CopiarDato(Linea,i));
-        Nombre_Usuario= CopiarDato(Linea, i);
+        CodigoIdentificador=stoi(CopiarDato(Linea,i));
+        NombreUsuario= CopiarDato(Linea, i);
         Correo= CopiarDato(Linea,i);
         Edad=short(stoi(CopiarDato(Linea,i)));
-        Password = CopiarDato(Linea,i);
+        Contrasena = CopiarDato(Linea,i);
         Pais= CopiarDato(Linea, i);
-        AgregarUsuario(Lista, CrearNodoUsuarios(Codigo_Identificador,Nombre_Usuario, Correo, Edad,Password,Pais));
+        AgregarUsuario(Lista, CrearNodoUsuarios(CodigoIdentificador,NombreUsuario, Correo, Edad,Contrasena,Pais));
     }
     archivo.close();
 }
@@ -98,33 +98,33 @@ void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
     archivo.close();
 }
 
-void fArchivo_MeterEnArchivoCanciones(PtrCanciones Lista){
+void ArchivoMeterEnArchivoCanciones(PtrCanciones Lista){
     ofstream archivo;
     archivo.open("CancionesArchivo.txt",ios::out);
 
     while (Lista){
         archivo<<Lista->Identificador<<"\t";
-        archivo<<Lista->Nombre_Cancion<<"\t";
+        archivo<<Lista->NombreCancion<<"\t";
         archivo<<Lista->Artista<<"\t";
         archivo<<Lista->Genero<<"\t";
-        archivo<<Lista->Year<<"\t";
-        archivo<<Lista->Contador_Reproducciones<<"\t";
-        archivo<<Lista->Contador_Likes<<"\n";
+        archivo<<Lista->Anio<<"\t";
+        archivo<<Lista->ContadorReproducciones<<"\t";
+        archivo<<Lista->ContadorLikes<<"\n";
         Lista=Lista->Next;
     }
     archivo.close();
 }
 
-void fArchivo_MeterEnArchivoUsuario(PtrUsuarios Lista){
+void ArchivoMeterEnArchivoUsuario(PtrUsuarios Lista){
     ofstream archivo;
     archivo.open("UsuarioArchivo.txt",ios::out);
 
     while (Lista){
-        archivo<<Lista->Codigo_Identificador<<"\t";
-        archivo<<Lista->Nombre_Usuario<<"\t";
+        archivo<<Lista->CodigoIdentificador<<"\t";
+        archivo<<Lista->NombreUsuario<<"\t";
         archivo<<Lista->Correo<<"\t";
         archivo<<Lista->Edad<<"\t";
-        archivo<<Lista->Password<<"\t";
+        archivo<<Lista->Contrasena<<"\t";
         archivo<<Lista->Pais<<"\n";
         
         Lista=Lista->Next;
@@ -132,13 +132,13 @@ void fArchivo_MeterEnArchivoUsuario(PtrUsuarios Lista){
     archivo.close();
 }
 
-void fArchivo_MeterEnHistorial(PtrUsuarios lista){
+void ArchivoMeterEnHistorial(PtrUsuarios lista){
     ofstream archivo;
     PtrUsuarios UsuLista=lista;
     PtrCanciones CanLista;
     archivo.open("UsuarioHistorialArchivo.txt",ios::out);
     while(UsuLista){
-        archivo<<UsuLista->Codigo_Identificador<<"\t";
+        archivo<<UsuLista->CodigoIdentificador<<"\t";
         CanLista=UsuLista->PtrHistorial;
         while (CanLista){
             if(CanLista->Next!=NULL)
@@ -162,7 +162,7 @@ void fArchivoGuardadoUsuario(PtrUsuarios lista){
     archivo.open("ArchivoHistorial.txt");
 
     CanAux= UsuAux->PtrHistorial;
-    linea= UsuAux->Codigo_Identificador + '/';
+    linea= UsuAux->CodigoIdentificador + '/';
 
     while(UsuAux){
         while(CanAux){

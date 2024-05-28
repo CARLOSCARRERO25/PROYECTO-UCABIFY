@@ -22,7 +22,7 @@ struct Usuarios{
 
 typedef Usuarios *PtrUsuarios;
 
-int contadorUsuarios=0; 
+int ContadorUsuarios=0; 
 
 PtrUsuarios SolicitarDatos(){
     PtrUsuarios auxDatos = new Usuarios;
@@ -40,7 +40,7 @@ PtrUsuarios SolicitarDatos(){
         cout<<">> ";
         cin>>edad;
         MsgdeErrorF(1, edad);
-    }while(!esNumero(edad));
+    }while(!EsNumero(edad));
     auxDatos->Edad=short(stoi(edad));
     
     cin.ignore();
@@ -98,7 +98,7 @@ void AgregarUsuario(PtrUsuarios &Lista, PtrUsuarios Nodo){ //Funcion para agrega
         }
         aux->Next = Nodo;
     }
-    contadorUsuarios++;
+    ContadorUsuarios++;
 }
 
 void EliminarUsuario(PtrUsuarios &Lista, int Posicion){// Funcion para eliminar Usuario por posicion
@@ -113,7 +113,7 @@ void EliminarUsuario(PtrUsuarios &Lista, int Posicion){// Funcion para eliminar 
         aux->Next = aux2->Next;
         delete aux2;
     }
-    contadorUsuarios--;
+    ContadorUsuarios--;
 }
 
 PtrUsuarios BuscarUsuario(PtrUsuarios &lista, int Posicion){
@@ -137,7 +137,7 @@ int BuscarPosicionDeUsuario(PtrUsuarios Lista, int Codigo){
 void ImprimirListaUsuarios(PtrUsuarios Lista){
     cout<<"La lista de usuarios de UCABIFY es: \n";
     cout<<"------------------------------------------------------------------------------------ \n";
-    for(int i=1; i<=contadorUsuarios; i++){
+    for(int i=1; i<=ContadorUsuarios; i++){
         cout<<i<<" )\t";
         cout<<Lista->CodigoIdentificador<<"\t";
         cout<<Lista->NombreUsuario<<"\t";

@@ -41,7 +41,7 @@ void ImprimirHistorial(PtrUsuarios ListaUsuarios, int Posicion){
     PtrUsuarios Aux = BuscarUsuario(ListaUsuarios, Posicion);
     PtrCanciones Aux2 = Aux->PtrHistorial;
     cout<<"El Historial del Usuario "<<Aux->NombreUsuario<<" es: \n";
-    cout<<" ID Usuario \t ID \t NOMBRE \t ARTISTA \t GENERO \t YEAR "<<endl;
+    cout<<" ID Usuario \t ID \t NOMBRE \t ARTISTA \t GENERO \t Anio "<<endl;
     for(int i=1; i<=Aux->ContadorHistorial; i++){
         cout<<i<<" )\t";
         cout<<Aux2->Identificador<<"\t";

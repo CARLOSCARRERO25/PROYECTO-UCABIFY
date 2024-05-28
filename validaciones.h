@@ -11,7 +11,7 @@ void delay(int secs) {
     for(int i = (time(NULL) + secs); time(NULL) != i; time(NULL));
 }
 
-bool esNumero(string numeroString)
+bool EsNumero(string numeroString)
 {
     if (numeroString.empty()){
         return false;  
@@ -34,7 +34,7 @@ void MsgdeErrorF(int a, string op){
     switch (a)
     {
     case (1):
-        if (!esNumero(op)){
+        if (!EsNumero(op)){
                 cout<<"No puede ingresar un caracter, es una opcion invalida. Vuelva a intentar\n";
                 delay(2);
                 system("cls");

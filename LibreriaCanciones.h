@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int contadorCanciones=0;
+int ContadorUsuarios=0;
 
 struct Canciones{
     int Identificador;
@@ -44,7 +44,7 @@ PtrCanciones SolicitarDatosCanciones(){
         cout<<">>";
         getline(cin,ano);
         MsgdeErrorF(1, ano);
-    }while(!esNumero(ano));
+    }while(!EsNumero(ano));
     auxDatos- Anio=stoi(ano);
     cout<<"--------------------------------------------------------------- \n";
 
@@ -101,7 +101,7 @@ void AgregarCancion(PtrCanciones &lista, PtrCanciones Nodo){
             aux=aux->Next;
         aux->Next=Nodo;
     }
-    contadorCanciones++;
+    ContadorUsuarios++;
 }
 
 void EliminarCancion(PtrCanciones &lista, int Posicion){
@@ -116,16 +116,16 @@ void EliminarCancion(PtrCanciones &lista, int Posicion){
         aux->Next = aux2->Next;
         delete aux2;
     }
-    contadorCanciones--;
+    ContadorUsuarios--;
 }
 
 void ImprimirListaCanciones(PtrCanciones Lista){
     cout<<"La lista de canciones de UCABIFY es: \n";
 
-    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t YEAR "<<endl;
+    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t Anio "<<endl;
     cout<<"--------------------------------------------------------------- \n";
 
-    for(int i=1; i<=contadorCanciones; i++){
+    for(int i=1; i<=ContadorUsuarios; i++){
         cout<<i<<" )\t";
         cout<<Lista->Identificador<<"\t";
         cout<<Lista->NombreCancion<<"\t";

@@ -28,7 +28,7 @@ int main(){
             cout<<">> ";
             cin>>ValidarOpcion;
             MsgdeError(1, ValidarOpcion);
-        }while(!esNumero(ValidarOpcion));
+        }while(!EsNumero(ValidarOpcion));
         
         switch (stoi(ValidarOpcion))
         {
@@ -38,7 +38,7 @@ int main(){
                     GenericMsg(2);
                     cin>>ValidarOpcion;
                     MsgdeError(1, ValidarOpcion);
-                }while(!esNumero(ValidarOpcion));
+                }while(!EsNumero(ValidarOpcion));
                 
                 switch (stoi(ValidarOpcion))
                 {
@@ -48,8 +48,8 @@ int main(){
                         Codigo = GenerarCodigo();
                     }while(ValidarCodigoUs(ListaUsuarios, Codigo));
 
-                    AgregarUsuario(ListaUsuarios,CrearNodoUsuarios(Codigo,Datos->NombreUsuario, Datos->Correo, Datos->Edad, Datos->Password, Datos->Pais));
-                    fArchivo_MeterEnArchivoUsuario(ListaUsuarios);
+                    AgregarUsuario(ListaUsuarios,CrearNodoUsuarios(Codigo,Datos->NombreUsuario, Datos->Correo, Datos->Edad, Datos->Contrasena, Datos->Pais));
+                    ArchivoMeterEnArchivoUsuario(ListaUsuarios);
                     break;
                 case 2: //Eliminar Usuarios (Faltan validaciones mas especifcas)
                     if(ListaUsuarios==NULL){
@@ -62,12 +62,12 @@ int main(){
                                 cout<<"Ingrese el N# de usuario que desea eliminar\n";
                                 cin>>ValidarOpcion;
                                 MsgdeError(1, ValidarOpcion);
-                            }while(!esNumero(ValidarOpcion));
+                            }while(!EsNumero(ValidarOpcion));
                                 MsgdeError(2, ValidarOpcion);
-                        }while (((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuario)));
+                        }while (((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuarios)));
                         EliminarUsuario(ListaUsuarios, stoi(ValidarOpcion));  
-                        fArchivo_MeterEnArchivoUsuario(ListaUsuarios);
-                        fArchivo_MeterEnHistorial(ListaUsuarios); 
+                        ArchivoMeterEnArchivoUsuario(ListaUsuarios);
+                        ArchivoMeterEnHistorial(ListaUsuarios); 
                     }
                         
                     break;
@@ -78,7 +78,7 @@ int main(){
                             cout<<">> ";
                             cin>>ValidarOpcion;
                             MsgdeError(1, ValidarOpcion);
-                        }while(!esNumero(ValidarOpcion));
+                        }while(!EsNumero(ValidarOpcion));
 
                         switch (stoi(ValidarOpcion))
                         {
@@ -94,8 +94,8 @@ int main(){
                                         cout<<">> ";
                                         cin>>ValidarOpcion;
                                         MsgdeError(1, ValidarOpcion);
-                                    }while(!esNumero(ValidarOpcion));
-                                }while(stoi(ValidarOpcion)<= 0 || stoi(ValidarOpcion)>ContadorUsuario);
+                                    }while(!EsNumero(ValidarOpcion));
+                                }while(stoi(ValidarOpcion)<= 0 || stoi(ValidarOpcion)>ContadorUsuarios);
                                 
                                 if (BuscarUsuario(ListaUsuarios, stoi(ValidarOpcion))->ContadorHistorial==0)
                                 {
@@ -113,7 +113,7 @@ int main(){
                                 cout<<">> ";
                                 cin>>ValidarOpcion;
                                 MsgdeError(1, ValidarOpcion);
-                            }while(!esNumero(ValidarOpcion));
+                            }while(!EsNumero(ValidarOpcion));
 
                             switch (stoi(ValidarOpcion))
                             {
@@ -124,7 +124,7 @@ int main(){
                                     cout<<">> ";
                                     cin>>Seleccion1;
                                     MsgdeError(1, Seleccion1);
-                                }while(!esNumero(Seleccion1));
+                                }while(!EsNumero(Seleccion1));
                 
                                 do{//SELECCION 2 ES LA CANCION QUE VOY A ELIMINAR
                                     cout<<"Seleccione el dato que desea eliminar del usuario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<"\n";
@@ -132,10 +132,10 @@ int main(){
                                     cout<<">> ";
                                     cin>>Seleccion2;
                                     MsgdeError(1, Seleccion2);
-                                }while(!esNumero(Seleccion2));
+                                }while(!EsNumero(Seleccion2));
 
                                 EliminarHistorial(ListaUsuarios, stoi(Seleccion1), stoi(Seleccion2));
-                                fArchivo_MeterEnHistorial(ListaUsuarios);
+                                ArchivoMeterEnHistorial(ListaUsuarios);
                                 
                                 break;
                             case 2:
@@ -145,12 +145,12 @@ int main(){
                                     cout<<">> ";
                                     cin>>Seleccion1;
                                     MsgdeError(1, Seleccion1);               
-                                }while(!esNumero(Seleccion1));
+                                }while(!EsNumero(Seleccion1));
                                 //AUXILIAR COPIA EL USUARIO BUSCADO
                                 Datos = BuscarUsuario(ListaUsuarios, stoi(Seleccion1));
                                 while(Datos->ContadorHistorial!=0)
                                         EliminarHistorial(ListaUsuarios, stoi(Seleccion1), 1);
-                                    fArchivo_MeterEnHistorial(ListaUsuarios);/*c*/
+                                    ArchivoMeterEnHistorial(ListaUsuarios);/*c*/
                                 break;
                             default:
                                 break;
@@ -180,7 +180,7 @@ int main(){
                     cout<<">> ";
                     cin>>ValidarOpcion;
                     MsgdeError(1, ValidarOpcion);
-                }while(!esNumero(ValidarOpcion));
+                }while(!EsNumero(ValidarOpcion));
 
                 switch (stoi(ValidarOpcion))
                 {
@@ -190,8 +190,8 @@ int main(){
                         Codigo = GenerarCodigo();
                     }while(ValidarCodigoCanciones(ListaCanciones, Codigo));
                     
-                    AgregarCancion(ListaCanciones, CrearNodoCanciones(Codigo,DatosCanciones->Nombre_Cancion,DatosCanciones->Artista, DatosCanciones->Genero,DatosCanciones->Year));
-                    fArchivo_MeterEnArchivoCanciones(ListaCanciones);
+                    AgregarCancion(ListaCanciones, CrearNodoCanciones(Codigo,DatosCanciones->NombreCancion,DatosCanciones->Artista, DatosCanciones->Genero,DatosCanciones->Anio));
+                    ArchivoMeterEnArchivoCanciones(ListaCanciones);
                     break;
                 case 2: //Eliminar Canciones (Faltan validaciones mas especificas)
                     if(ListaCanciones==NULL){
@@ -205,11 +205,11 @@ int main(){
                                 cout<<">> ";
                                 cin>>ValidarOpcion;
                                 MsgdeError(1, ValidarOpcion);
-                            }while(!esNumero(ValidarOpcion));
-                        }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>contadorCanciones);
+                            }while(!EsNumero(ValidarOpcion));
+                        }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>ContadorUsuarios);
                         
                         EliminarCancion(ListaCanciones, stoi(ValidarOpcion));
-                        fArchivo_MeterEnArchivoCanciones(ListaCanciones);
+                        ArchivoMeterEnArchivoCanciones(ListaCanciones);
                     }
                     break;
                 case 3://Imprimir lista de canciones
@@ -252,9 +252,9 @@ int main(){
                 cout<<">> ";
                 cin>>Seleccion1;
                     MsgdeError(1, Seleccion1);
-                }while(!esNumero(Seleccion1));
+                }while(!EsNumero(Seleccion1));
                 MsgdeError(2, Seleccion1);
-            }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuario);
+            }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
 
             do{
                 do{
@@ -262,12 +262,12 @@ int main(){
                     cout<<">> ";
                     cin>>Seleccion2;
                     MsgdeError(1, Seleccion2);
-                }while(!esNumero(Seleccion2));
+                }while(!EsNumero(Seleccion2));
                 MsgdeError(3, Seleccion2);
-            }while(stoi(Seleccion2)<=0 || stoi(Seleccion2)>contadorCanciones);
+            }while(stoi(Seleccion2)<=0 || stoi(Seleccion2)>ContadorUsuarios);
 
             AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2));
-            fArchivo_MeterEnHistorial(ListaUsuarios);
+            ArchivoMeterEnHistorial(ListaUsuarios);
             break;
         default:
             break;
@@ -348,21 +348,21 @@ void MsgdeError(int A, string ValidarOpcion){
     switch (A)
     {
     case (1):
-        if (!esNumero(ValidarOpcion)){
+        if (!EsNumero(ValidarOpcion)){
                 cout<<"No puede ingresar un caracter, es una opcion invalida. Vuelva a intentar\n";
                 delay(2);
                 system("cls");
             }
         break;
     case(2):
-        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuario)){
+        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuarios)){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");
         } 
         break;
     case(3):
-        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>contadorCanciones)){
+        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuarios)){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");
