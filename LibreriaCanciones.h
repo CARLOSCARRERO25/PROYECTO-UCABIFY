@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int ContadorUsuarios=0;
+int ContadorCanciones=0;
 
 struct Canciones{
     int Identificador;
@@ -45,7 +45,7 @@ PtrCanciones SolicitarDatosCanciones(){
         getline(cin,ano);
         MsgdeErrorF(1, ano);
     }while(!EsNumero(ano));
-    auxDatos- Anio=stoi(ano);
+    auxDatos->Anio=stoi(ano);
     cout<<"--------------------------------------------------------------- \n";
 
     return auxDatos;
@@ -78,14 +78,14 @@ int BuscarPosicionDeCancion(PtrCanciones Lista, int Codigo){
     return i;
 }
 
-PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista, string genero, int ano){
+PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista, string genero, int anio){
     PtrCanciones aux= new Canciones;
     aux->Identificador = identificador;
     aux->NombreCancion= nombre;
     aux->Artista= artista;
     aux->Genero = genero;
-    aux- Anio= ano;
-    aux-> = 0;
+    aux->Anio= anio;
+    aux-> ContadorReproducciones = 0;
     aux->ContadorLikes=0;
     aux->Like = 0;
     aux->Next = NULL;
@@ -101,7 +101,7 @@ void AgregarCancion(PtrCanciones &lista, PtrCanciones Nodo){
             aux=aux->Next;
         aux->Next=Nodo;
     }
-    ContadorUsuarios++;
+    ContadorCanciones++;
 }
 
 void EliminarCancion(PtrCanciones &lista, int Posicion){
@@ -116,22 +116,22 @@ void EliminarCancion(PtrCanciones &lista, int Posicion){
         aux->Next = aux2->Next;
         delete aux2;
     }
-    ContadorUsuarios--;
+    ContadorCanciones--;
 }
 
 void ImprimirListaCanciones(PtrCanciones Lista){
     cout<<"La lista de canciones de UCABIFY es: \n";
 
-    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t Anio "<<endl;
+    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t >Anio "<<endl;
     cout<<"--------------------------------------------------------------- \n";
 
-    for(int i=1; i<=ContadorUsuarios; i++){
+    for(int i=1; i<=ContadorCanciones; i++){
         cout<<i<<" )\t";
         cout<<Lista->Identificador<<"\t";
         cout<<Lista->NombreCancion<<"\t";
         cout<<Lista->Artista<<"\t";
         cout<<Lista->Genero<<"\t";
-        cout<<Lista- Anio<<"\n";
+        cout<<Lista->Anio<<"\n";
         Lista=Lista->Next;
     }
             cout<<"--------------------------------------------------------------- \n";
