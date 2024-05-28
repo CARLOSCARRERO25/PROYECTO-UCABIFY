@@ -9,11 +9,11 @@ using namespace std;
 
 
 struct Usuarios{
-    int Codigo_Identificador;
-    string Nombre_Usuario;
+    int CodigoIdentificador;
+    string NombreUsuario;
     string Correo;
     short Edad;
-    string Password;
+    string Contrasena;
     string Pais;
     Usuarios *Next;
     Canciones *PtrHistorial;
@@ -33,7 +33,7 @@ PtrUsuarios SolicitarDatos(){
     cout<<">> ";
     cin.ignore();
     cout<<"Ingrese su Nombre de usuario: \n";
-    getline(cin,auxDatos->Nombre_Usuario);
+    getline(cin,auxDatos->NombreUsuario);
 
     do{
         cout<<"Ingrese su edad:\n";
@@ -54,7 +54,7 @@ PtrUsuarios SolicitarDatos(){
 
     cout<<"\nIngrese una contrasena:\n";
     cout<<">> ";
-    getline(cin,auxDatos->Password);
+    getline(cin,auxDatos->Contrasena);
 
     cout<<"--------------------------------------------------------------- \n";
 
@@ -65,7 +65,7 @@ PtrUsuarios SolicitarDatos(){
 bool ValidarCodigoUs(PtrUsuarios Lista,int Codigo){
     PtrUsuarios aux = Lista;
     while(aux!=NULL){
-        if(aux->Codigo_Identificador == Codigo)
+        if(aux->CodigoIdentificador == Codigo)
             return 1;
         aux=aux->Next;
     }
@@ -73,13 +73,13 @@ bool ValidarCodigoUs(PtrUsuarios Lista,int Codigo){
 }
     
 
-PtrUsuarios CrearNodoUsuarios(int Codigo, string Nombre, string Correo, short Edad, string Pass, string Pais){
+PtrUsuarios CrearNodoUsuarios(int Codigo, string Nombre, string Correo, short Edad, string Contrasena, string Pais){
     PtrUsuarios Aux = new Usuarios;
-    Aux->Codigo_Identificador= Codigo;
-    Aux->Nombre_Usuario = Nombre;
+    Aux->CodigoIdentificador= Codigo;
+    Aux->NombreUsuario = Nombre;
     Aux->Correo = Correo;
     Aux->Edad = Edad;
-    Aux->Password = Pass;
+    Aux->Contrasena = Contrasena;
     Aux->Pais= Pais;
     Aux->Next= NULL;
     Aux->PtrHistorial = NULL;
@@ -127,7 +127,7 @@ PtrUsuarios BuscarUsuario(PtrUsuarios &lista, int Posicion){
 int BuscarPosicionDeUsuario(PtrUsuarios Lista, int Codigo){
     int i=1;
     PtrUsuarios aux = Lista;
-    while(aux->Codigo_Identificador != Codigo){
+    while(aux->CodigoIdentificador != Codigo){
         i++;
         aux=aux->Next;
     }
@@ -139,10 +139,10 @@ void ImprimirListaUsuarios(PtrUsuarios Lista){
     cout<<"------------------------------------------------------------------------------------ \n";
     for(int i=1; i<=contadorUsuarios; i++){
         cout<<i<<" )\t";
-        cout<<Lista->Codigo_Identificador<<"\t";
-        cout<<Lista->Nombre_Usuario<<"\t";
+        cout<<Lista->CodigoIdentificador<<"\t";
+        cout<<Lista->NombreUsuario<<"\t";
         cout<<Lista->Correo<<"\t";
-        cout<<Lista->Password<<"\t";
+        cout<<Lista->Contrasena<<"\t";
         cout<<Lista->Edad<<"\t";
         cout<<Lista->Pais<<"\n";
         Lista=Lista->Next;

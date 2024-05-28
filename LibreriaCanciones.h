@@ -9,12 +9,12 @@ int contadorCanciones=0;
 
 struct Canciones{
     int Identificador;
-    string Nombre_Cancion;
+    string NombreCancion;
     string Artista;
     string Genero;
-    int Year;
-    int Contador_Reproducciones;
-    int Contador_Likes;
+    int Anio;
+    int ContadorReproducciones;
+    int ContadorLikes;
     bool Like;
     Canciones *Next;
 };
@@ -29,7 +29,7 @@ PtrCanciones SolicitarDatosCanciones(){
     cout<<"Ingrese los datos datos que le seran solicitados a continuacion\n\n";
     cout<<"Ingrese su Nombre de la cancion: \n";
     cout<<">>";
-    getline(cin,auxDatos->Nombre_Cancion);
+    getline(cin,auxDatos->NombreCancion);
 
     cout<<"\nIngrese el nombre del artista:\n";
     cout<<">>";
@@ -45,7 +45,7 @@ PtrCanciones SolicitarDatosCanciones(){
         getline(cin,ano);
         MsgdeErrorF(1, ano);
     }while(!esNumero(ano));
-    auxDatos->Year=stoi(ano);
+    auxDatos- Anio=stoi(ano);
     cout<<"--------------------------------------------------------------- \n";
 
     return auxDatos;
@@ -81,12 +81,12 @@ int BuscarPosicionDeCancion(PtrCanciones Lista, int Codigo){
 PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista, string genero, int ano){
     PtrCanciones aux= new Canciones;
     aux->Identificador = identificador;
-    aux->Nombre_Cancion= nombre;
+    aux->NombreCancion= nombre;
     aux->Artista= artista;
     aux->Genero = genero;
-    aux->Year= ano;
-    aux->Contador_Reproducciones = 0;
-    aux->Contador_Likes=0;
+    aux- Anio= ano;
+    aux-> = 0;
+    aux->ContadorLikes=0;
     aux->Like = 0;
     aux->Next = NULL;
     return aux;
@@ -128,10 +128,10 @@ void ImprimirListaCanciones(PtrCanciones Lista){
     for(int i=1; i<=contadorCanciones; i++){
         cout<<i<<" )\t";
         cout<<Lista->Identificador<<"\t";
-        cout<<Lista->Nombre_Cancion<<"\t";
+        cout<<Lista->NombreCancion<<"\t";
         cout<<Lista->Artista<<"\t";
         cout<<Lista->Genero<<"\t";
-        cout<<Lista->Year<<"\n";
+        cout<<Lista- Anio<<"\n";
         Lista=Lista->Next;
     }
             cout<<"--------------------------------------------------------------- \n";

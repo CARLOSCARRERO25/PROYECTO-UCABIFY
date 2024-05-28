@@ -6,7 +6,7 @@
 #include "carlosArchivos.h"
 using namespace std;
 
-void MsgdeError(int a, string op);
+void MsgdeError(int a, string ValidarOpcion);
 int GenerarCodigo();
 void GenericMsg(int a);
 
@@ -48,7 +48,7 @@ int main(){
                         Codigo = GenerarCodigo();
                     }while(ValidarCodigoUs(ListaUsuarios, Codigo));
 
-                    AgregarUsuario(ListaUsuarios,CrearNodoUsuarios(Codigo,Datos->Nombre_Usuario, Datos->Correo, Datos->Edad, Datos->Password, Datos->Pais));
+                    AgregarUsuario(ListaUsuarios,CrearNodoUsuarios(Codigo,Datos->NombreUsuario, Datos->Correo, Datos->Edad, Datos->Password, Datos->Pais));
                     fArchivo_MeterEnArchivoUsuario(ListaUsuarios);
                     break;
                 case 2: //Eliminar Usuarios (Faltan validaciones mas especifcas)
@@ -64,7 +64,7 @@ int main(){
                                 MsgdeError(1, ValidarOpcion);
                             }while(!esNumero(ValidarOpcion));
                                 MsgdeError(2, ValidarOpcion);
-                        }while (((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>contadorUsuarios)));
+                        }while (((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuario)));
                         EliminarUsuario(ListaUsuarios, stoi(ValidarOpcion));  
                         fArchivo_MeterEnArchivoUsuario(ListaUsuarios);
                         fArchivo_MeterEnHistorial(ListaUsuarios); 
@@ -95,7 +95,7 @@ int main(){
                                         cin>>ValidarOpcion;
                                         MsgdeError(1, ValidarOpcion);
                                     }while(!esNumero(ValidarOpcion));
-                                }while(stoi(ValidarOpcion)<= 0 || stoi(ValidarOpcion)>contadorUsuarios);
+                                }while(stoi(ValidarOpcion)<= 0 || stoi(ValidarOpcion)>ContadorUsuario);
                                 
                                 if (BuscarUsuario(ListaUsuarios, stoi(ValidarOpcion))->ContadorHistorial==0)
                                 {
@@ -127,7 +127,7 @@ int main(){
                                 }while(!esNumero(Seleccion1));
                 
                                 do{//SELECCION 2 ES LA CANCION QUE VOY A ELIMINAR
-                                    cout<<"Seleccione el dato que desea eliminar del usuario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->Nombre_Usuario<<"\n";
+                                    cout<<"Seleccione el dato que desea eliminar del usuario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<"\n";
                                     ImprimirHistorial(ListaUsuarios, stoi(Seleccion1));
                                     cout<<">> ";
                                     cin>>Seleccion2;
@@ -254,7 +254,7 @@ int main(){
                     MsgdeError(1, Seleccion1);
                 }while(!esNumero(Seleccion1));
                 MsgdeError(2, Seleccion1);
-            }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>contadorUsuarios);
+            }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuario);
 
             do{
                 do{
@@ -278,8 +278,8 @@ int main(){
 
 
 
-void GenericMsg(int a){
-    switch (a)
+void GenericMsg(int A){
+    switch (A)
     {
     case 1:
         system("cls");
@@ -344,25 +344,25 @@ void GenericMsg(int a){
     }
 }
 
-void MsgdeError(int a, string op){
-    switch (a)
+void MsgdeError(int A, string ValidarOpcion){
+    switch (A)
     {
     case (1):
-        if (!esNumero(op)){
+        if (!esNumero(ValidarOpcion)){
                 cout<<"No puede ingresar un caracter, es una opcion invalida. Vuelva a intentar\n";
                 delay(2);
                 system("cls");
             }
         break;
     case(2):
-        if((stoi(op)<=0)||(stoi(op)>contadorUsuarios)){
+        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuario)){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");
         } 
         break;
     case(3):
-        if((stoi(op)<=0)||(stoi(op)>contadorCanciones)){
+        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>contadorCanciones)){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");
