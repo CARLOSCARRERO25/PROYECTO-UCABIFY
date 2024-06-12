@@ -264,7 +264,7 @@ int main(){
                     MsgdeError(1, Seleccion2);
                 }while(!EsNumero(Seleccion2));
                 MsgdeError(3, Seleccion2);
-            }while(stoi(Seleccion2)<=0 || stoi(Seleccion2)>ContadorUsuarios);
+            }while(stoi(Seleccion2)<=0 || stoi(Seleccion2)>ContadorCanciones);
 
             AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2));
             ArchivoMeterEnHistorial(ListaUsuarios);
@@ -362,7 +362,7 @@ void MsgdeError(int A, string ValidarOpcion){
         } 
         break;
     case(3):
-        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorUsuarios)){
+        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorCanciones)){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");

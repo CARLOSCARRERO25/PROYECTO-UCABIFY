@@ -25,8 +25,10 @@ void EliminarHistorial(PtrUsuarios &Lista, int PosicionUsu, int PosicionHistoria
     PtrUsuarios Aux = BuscarUsuario(Lista, PosicionUsu);
     PtrCanciones Aux2 = Aux->PtrHistorial;
     if(PosicionHistorial == 1){
-        Aux->PtrHistorial->Next = Aux2->Next;
-        delete Aux2;
+        PtrCanciones Aux3 = Aux2;
+        Aux2=Aux3->Next;
+        delete Aux3;
+        Aux->PtrHistorial = Aux2;
     }else{
         for(int i=1; i!=PosicionHistorial-1; i++)
             Aux2=Aux2->Next;
