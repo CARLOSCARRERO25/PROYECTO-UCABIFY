@@ -54,13 +54,18 @@ void ImprimirHistorial(PtrUsuarios ListaUsuarios, int Posicion){
     cout<<endl;
 }
 
-bool BuscarHistorial(PtrUsuarios ListaUsuarios,int PosicionUs ,int CodigoCancion){
+bool BuscarHistorial(PtrUsuarios ListaUsuarios,int PosicionUs,int CodigoCancion){
     PtrUsuarios Aux=BuscarUsuario(ListaUsuarios, PosicionUs);
     PtrCanciones Aux2 = Aux->PtrHistorial;
-    while (Aux2->Next != NULL || Aux2->Identificador != CodigoCancion){
+    if (Aux->PtrHistorial == NULL)
+        return 0;
+
+    while ((Aux2 != NULL)){
+        if(Aux2->Identificador == CodigoCancion)
+            return 1;
         Aux2=Aux2->Next;
     }
-    
+    return 0;
 }
 
 #endif

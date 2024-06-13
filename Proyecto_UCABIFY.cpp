@@ -265,8 +265,15 @@ int main(){
                 }while(!EsNumero(Seleccion2));
                 MsgdeError(3, Seleccion2);
             }while(stoi(Seleccion2)<=0 || stoi(Seleccion2)>ContadorCanciones);
+            Codigo = BuscarCancion(ListaCanciones, stoi(Seleccion2))->Identificador;
 
-            AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2));
+            if(BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)){
+                cout<<"La cancion ya se encuentra en el historial\n";
+                delay(2);
+            }else{
+                AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2));
+            }
+            
             ArchivoMeterEnHistorial(ListaUsuarios);
             break;
         default:
