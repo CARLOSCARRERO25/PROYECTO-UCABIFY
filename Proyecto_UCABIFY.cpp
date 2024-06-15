@@ -190,7 +190,7 @@ int main(){
                         Codigo = GenerarCodigo();
                     }while(ValidarCodigoCanciones(ListaCanciones, Codigo));
                     
-                    AgregarCancion(ListaCanciones, CrearNodoCanciones(Codigo,DatosCanciones->NombreCancion,DatosCanciones->Artista, DatosCanciones->Genero,DatosCanciones->Anio));
+                    AgregarCancion(ListaCanciones, CrearNodoCanciones(Codigo,DatosCanciones->NombreCancion,DatosCanciones->Artista, DatosCanciones->Genero,DatosCanciones->Anio,0,0));
                     ArchivoMeterEnArchivoCanciones(ListaCanciones);
                     break;
                 case 2: //Eliminar Canciones (Faltan validaciones mas especificas)
@@ -265,13 +265,36 @@ int main(){
                 }while(!EsNumero(Seleccion2));
                 MsgdeError(3, Seleccion2);
             }while(stoi(Seleccion2)<=0 || stoi(Seleccion2)>ContadorCanciones);
+            Codigo = BuscarCancion(ListaCanciones, stoi(Seleccion2))->Identificador;
 
-            if(BuscarHistorial(ListaUsuarios, stoi(Seleccion1), BuscarCancion(ListaCanciones, stoi(Seleccion2))->Identificador)){
-                cout<<"La cancion ya se encuentra en el historial\n";
-                delay(2);
-            }else{
+            if(!EncontrarElementoHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)){
                 AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2));
             }
+            
+            BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->ContadorReproducciones++;
+
+            do{
+                do{
+                    if(BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like==0){
+                        cout<<"Que tal te pareci"<<char(162)<<" la cancion? Quisieras darle like?\n";
+                        cout<<"( 1 ) Dar Like\n";
+                        cout<<"( 2 ) No dar like\n";
+                    }else{
+                        cout<<"Que tal te pareci"<<char(162)<<" la cancion? Quisiera mantener su like?\n";
+                        cout<<"( 1 ) Mantener like\n";
+                        cout<<"( 2 ) Quitar Like\n";
+                    }
+                    cout<<">> ";
+                    cin>>Seleccion2;
+                    MsgdeError(1, Seleccion2);
+                }while(!EsNumero(Seleccion2));
+                MsgdeError(4, Seleccion2);
+            }while(stoi(Seleccion2)<=0 || stoi(Seleccion2)>2);
+
+            if(stoi(Seleccion2)==1)
+                BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like==1;
+            else
+                BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like==0;
 
             BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorReproducciones++;
             ArchivoMeterEnHistorial(ListaUsuarios);
@@ -374,8 +397,13 @@ void MsgdeError(int A, string ValidarOpcion){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");
-        } 
-        break;
+        }
+    case (4):
+        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>2)){
+            cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
+            delay(2);
+            system("cls");
+        }
         break;
     default:
         break;

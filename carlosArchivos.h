@@ -52,8 +52,10 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
         Artista = CopiarDato(Linea,i);
         Genero = CopiarDato(Linea,i);
         Anio = stoi(CopiarDato(Linea,i));
+        ContadorReproducciones = stoi(CopiarDato(Linea,i));
+        ContadorLikes = stoi(CopiarDato(Linea,i));
 
-        AgregarCancion(Lista, CrearNodoCanciones(Identificador, NombreCancion, Artista, Genero, Anio));
+        AgregarCancion(Lista, CrearNodoCanciones(Identificador, NombreCancion, Artista, Genero, Anio,ContadorReproducciones, ContadorLikes));
     }
     archivo.close();
 }

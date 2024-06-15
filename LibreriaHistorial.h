@@ -10,12 +10,12 @@ void AgregarHistorial(PtrUsuarios &ListaUsuarios, PtrCanciones ListaCanciones, i
     PtrCanciones Aux2 = BuscarCancion(ListaCanciones, PosCan);
 
     if(Aux->PtrHistorial==NULL){
-        Aux->PtrHistorial = CrearNodoCanciones(Aux2->Identificador, Aux2->NombreCancion, Aux2->Artista, Aux2->Genero, Aux2->Anio);
+        Aux->PtrHistorial = CrearNodoCanciones(Aux2->Identificador, Aux2->NombreCancion, Aux2->Artista, Aux2->Genero, Aux2->Anio,0,0);
     }else{
         PtrCanciones Aux3 = Aux->PtrHistorial;
         while(Aux3->Next!=NULL)
             Aux3=Aux3->Next;
-        Aux3-> Next = CrearNodoCanciones(Aux2->Identificador, Aux2->NombreCancion, Aux2->Artista, Aux2->Genero, Aux2->Anio);
+        Aux3-> Next = CrearNodoCanciones(Aux2->Identificador, Aux2->NombreCancion, Aux2->Artista, Aux2->Genero, Aux2->Anio,0,0);
     }
     Aux->ContadorHistorial++;
 }
@@ -54,7 +54,7 @@ void ImprimirHistorial(PtrUsuarios ListaUsuarios, int Posicion){
     cout<<endl;
 }
 
-bool BuscarHistorial(PtrUsuarios ListaUsuarios,int PosicionUs,int CodigoCancion){
+bool EncontrarElementoHistorial(PtrUsuarios ListaUsuarios,int PosicionUs,int CodigoCancion){
     PtrUsuarios Aux=BuscarUsuario(ListaUsuarios, PosicionUs);
     PtrCanciones Aux2 = Aux->PtrHistorial;
     if (Aux->PtrHistorial == NULL)
@@ -67,5 +67,17 @@ bool BuscarHistorial(PtrUsuarios ListaUsuarios,int PosicionUs,int CodigoCancion)
     }
     return 0;
 }
+
+PtrCanciones BuscarHistorial(PtrUsuarios ListaUsuarios,int PosicionUs,int CodigoCancion){
+    PtrUsuarios Aux=BuscarUsuario(ListaUsuarios, PosicionUs);
+    PtrCanciones Aux2 = Aux->PtrHistorial;
+
+    while ((Aux2 != NULL) && (Aux2->Identificador!=CodigoCancion)){
+        Aux2=Aux2->Next;
+    }
+    return Aux2;
+}
+
+
 
 #endif
