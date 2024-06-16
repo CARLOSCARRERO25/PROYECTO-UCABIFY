@@ -55,7 +55,7 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
         ContadorReproducciones = stoi(CopiarDato(Linea,i));
         ContadorLikes = stoi(CopiarDato(Linea,i));
 
-        AgregarCancion(Lista, CrearNodoCanciones(Identificador, NombreCancion, Artista, Genero, Anio,ContadorReproducciones, ContadorLikes));
+        AgregarCancion(Lista, CrearNodoCanciones(Identificador, NombreCancion, Artista, Genero, Anio,ContadorReproducciones, ContadorLikes,0));
     }
     archivo.close();
 }
@@ -84,7 +84,7 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
 }
 
 void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
-    int codigoUS, CodigoCan;
+    int codigoUS, CodigoCan,Reproduccion, like;
     ifstream archivo("UsuarioHistorialArchivo.txt");
     string Linea; 
     while(getline(archivo, Linea)){
@@ -93,7 +93,9 @@ void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
         while(i<Linea.size()){
             if(i!=Linea.size()){
                 CodigoCan = BuscarPosicionDeCancion(ListaCanciones, stoi(CopiarDato(Linea, i)));
-                AgregarHistorial(Lista, ListaCanciones,codigoUS, CodigoCan);
+                like= stoi(CopiarDato(Linea, i));
+                Reproduccion = stoi(CopiarDato(Linea,i));
+                AgregarHistorial(Lista, ListaCanciones,codigoUS, CodigoCan,Reproduccion,like);
             }
         }
     }
@@ -143,10 +145,15 @@ void ArchivoMeterEnHistorial(PtrUsuarios lista){
         archivo<<UsuLista->CodigoIdentificador<<"\t";
         CanLista=UsuLista->PtrHistorial;
         while (CanLista){
-            if(CanLista->Next!=NULL)
+            if(CanLista->Next!=NULL){
                 archivo<<CanLista->Identificador<<"\t";
-            else
-                archivo<<CanLista->Identificador;
+                archivo<<CanLista->Like<<"\t";
+                archivo<<CanLista->ContadorReproducciones<<"\t";
+            }else{
+                archivo<<CanLista->Identificador<<"\t";
+                archivo<<CanLista->Like<<"\t";
+                archivo<<CanLista->ContadorReproducciones;
+            }
             CanLista=CanLista->Next;
         }   
         archivo<<"\n";

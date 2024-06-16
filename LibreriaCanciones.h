@@ -78,7 +78,7 @@ int BuscarPosicionDeCancion(PtrCanciones Lista, int Codigo){
     return i;
 }
 
-PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista, string genero, int anio,int reproducciones, int likes){
+PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista, string genero, int anio,int reproducciones, int likes, int Darlike){
     PtrCanciones aux= new Canciones;
     aux->Identificador = identificador;
     aux->NombreCancion= nombre;
@@ -87,7 +87,7 @@ PtrCanciones CrearNodoCanciones(int identificador, string nombre, string artista
     aux->Anio= anio;
     aux-> ContadorReproducciones = reproducciones;
     aux->ContadorLikes=likes;
-    aux->Like = 0;
+    aux->Like = Darlike;
     aux->Next = NULL;
     return aux;
 }
