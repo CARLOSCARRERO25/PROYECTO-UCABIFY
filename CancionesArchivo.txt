@@ -1,7 +1,7 @@
 10001	Rivers in the Desert	Lyn	Rock	2017	0	0
 10002	Veridis Quo	Daft Punk	Electronica	2001	0	0
-10003	The Alphabeat	David Guetta	Electronica	2011	1	0
-10004	Am I Dreaming	Metro Boomin	Hip Hop	2023	1	0
+10003	The Alphabeat	David Guetta	Electronica	2011	0	0
+10004	Am I Dreaming	Metro Boomin	Hip Hop	2023	0	0
 10005	The Final Countdown	Europe	Rock	1986	0	0
 10006	Money, Money, Money	ABBA	Pop	1976	0	0
 10007	Love Me Again	John Newman	Pop	2013	0	0
