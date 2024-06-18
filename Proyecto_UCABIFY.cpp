@@ -398,7 +398,7 @@ void MsgdeError(int A, string ValidarOpcion){
         } 
         break;
     case(3):
-        if((stoi(ValidarOpcion)<=0) || (stoi(ValidarOpcion)>ContadorCanciones)){
+        if((stoi(ValidarOpcion)<=0)||(stoi(ValidarOpcion)>ContadorCanciones)){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");
