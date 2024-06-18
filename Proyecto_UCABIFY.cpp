@@ -206,7 +206,7 @@ int main(){
                                 cin>>ValidarOpcion;
                                 MsgdeError(1, ValidarOpcion);
                             }while(!EsNumero(ValidarOpcion));
-                        }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>ContadorUsuarios);
+                        }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>ContadorCanciones);
                         
                         EliminarCancion(ListaCanciones, stoi(ValidarOpcion));
                         ArchivoMeterEnArchivoCanciones(ListaCanciones);
@@ -248,9 +248,9 @@ int main(){
             do{
                 do{
                     GenericMsg(4);
-                ImprimirListaUsuarios(ListaUsuarios);
-                cout<<">> ";
-                cin>>Seleccion1;
+                    ImprimirListaUsuarios(ListaUsuarios);
+                    cout<<">> ";
+                    cin>>Seleccion1;
                     MsgdeError(1, Seleccion1);
                 }while(!EsNumero(Seleccion1));
                 MsgdeError(2, Seleccion1);
@@ -292,10 +292,14 @@ int main(){
                 MsgdeError(4, ValidarOpcion);
             }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>2);
 
-            if(stoi(ValidarOpcion)==1)
+            if(stoi(ValidarOpcion)==1){
                 BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like=1;
-            else
+                BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes++;
+            }else{
                 BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like=0;
+                if(BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes>0)
+                    BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes--;
+            }
 
             BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorReproducciones++;
             ArchivoMeterEnHistorial(ListaUsuarios);
@@ -394,7 +398,7 @@ void MsgdeError(int A, string ValidarOpcion){
         } 
         break;
     case(3):
-        if(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>ContadorCanciones){
+        if((stoi(ValidarOpcion)<=0) || (stoi(ValidarOpcion)>ContadorCanciones)){
             cout<<"La opcion que ingreso es invalida, vuelva a intentar\n";
             delay(2);
             system("cls");
