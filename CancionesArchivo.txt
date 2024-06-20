@@ -1,28 +1,28 @@
-10001	Rivers in the Desert	Lyn	Rock	2017	0	0
-10002	Veridis Quo	Daft Punk	Electronica	2001	0	0
-10003	The Alphabeat	David Guetta	Electronica	2011	0	0
-10004	Am I Dreaming	Metro Boomin	Hip Hop	2023	0	0
-10005	The Final Countdown	Europe	Rock	1986	0	0
-10006	Money, Money, Money	ABBA	Pop	1976	0	0
-10007	Love Me Again	John Newman	Pop	2013	0	0
-10008	Titanium	David Guetta	Electronica	2011	0	0
-10009	Annihilate	Metro Boomin	Hip Hop	2023	0	0
-10010	Colors Flying High	Lyn	Rock	2017	0	0
-10011	Runaway	Galantis	Electrónica	2016	0	0
-10012	Big in Japan	Alphaville	Pop	1984	0	0
-10013	Disconnected	Pegboard Nerds	Electronica	2012	0	0
-10014	End of Line	Daft Punk	Electronica	2010	0	0
-10015	Words	F.R. David	Pop	1983	0	0
-10016	Shout	Tears For Fears	Rock	1984	0	0
-10017	Womanizer	Britney Spears	Pop	2008	0	0
-10018	Sorry for Party Rocking	LMFAO	Electronica	2011	0	0
-10019	Rhinestone Eyes	Gorillaz	Pop	2010	0	0
-10020	Emergency	Pegboard Nerds	Electronica	2014	0	0
-10021	Poker Face	Lady Gaga	Pop	2008	0	0
-10022	It's On Again	Alicia Keys	Pop	2014	0	0
-10023	You Are Stronger	Lyn	Rock	2020	0	0
-10024	Party Rock Anthem	LMFAO	Electronica	2011	0	0
-10025	Break My Heart	Dua Lipa	Pop	2020	0	0
-10026	We Got the Noise	Donots	Rock	2004	0	0
-10027	Eye of the Tiger	Survivor	Rock	1982	0	0
-10028	I'm Blue	Eiffel 65	Electronica	1999	0	0
+10001	Rivers in the Desert	Lyn	Rock	2017	96	3
+10002	Veridis Quo	Daft Punk	Electronica	2001	40	1
+10003	The Alphabeat	David Guetta	Electronica	2011	60	2
+10004	Am I Dreaming	Metro Boomin	Hip Hop	2023	166	5
+10005	The Final Countdown	Europe	Rock	1986	80	4
+10006	Money, Money, Money	ABBA	Pop	1976	28	0
+10007	Love Me Again	John Newman	Pop	2013	124	1
+10008	Titanium	David Guetta	Electronica	2011	60	1
+10009	Annihilate	Metro Boomin	Hip Hop	2023	68	2
+10010	Colors Flying High	Lyn	Rock	2017	23	1
+10011	Runaway	Galantis	Electrónica	2016	29	1
+10012	Big in Japan	Alphaville	Pop	1984	36	1
+10013	Disconnected	Pegboard Nerds	Electronica	2012	57	0
+10014	End of Line	Daft Punk	Electronica	2010	58	1
+10015	Words	F.R. David	Pop	1983	25	1
+10016	Shout	Tears For Fears	Rock	1984	60	1
+10017	Womanizer	Britney Spears	Pop	2008	113	4
+10018	Sorry for Party Rocking	LMFAO	Electronica	2011	18	0
+10019	Rhinestone Eyes	Gorillaz	Pop	2010	82	2
+10020	Emergency	Pegboard Nerds	Electronica	2014	67	2
+10021	Poker Face	Lady Gaga	Pop	2008	57	2
+10022	It's On Again	Alicia Keys	Pop	2014	58	1
+10023	You Are Stronger	Lyn	Rock	2020	31	1
+10024	Party Rock Anthem	LMFAO	Electronica	2011	91	3
+10025	Break My Heart	Dua Lipa	Pop	2020	86	3
+10026	We Got the Noise	Donots	Rock	2004	43	1
+10027	Eye of the Tiger	Survivor	Rock	1982	83	1
+10028	I'm Blue	Eiffel 65	Electronica	1999	162	5
