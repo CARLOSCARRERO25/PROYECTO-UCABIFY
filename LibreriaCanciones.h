@@ -20,6 +20,8 @@ struct Canciones{
 };
 typedef Canciones *PtrCanciones;
 
+
+
 PtrCanciones SolicitarDatosCanciones(){
     PtrCanciones auxDatos = new Canciones;
     string ano;
@@ -124,8 +126,9 @@ void ImprimirListaCanciones(PtrCanciones Lista){
 
     cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t >Anio "<<endl;
     cout<<"--------------------------------------------------------------- \n";
+    int i=1;
 
-    for(int i=1; i<=ContadorCanciones; i++){
+    while(Lista!=NULL){
         cout<<i<<" )\t";
         cout<<Lista->Identificador<<"\t";
         cout<<Lista->NombreCancion<<"\t";
@@ -133,10 +136,32 @@ void ImprimirListaCanciones(PtrCanciones Lista){
         cout<<Lista->Genero<<"\t";
         cout<<Lista->Anio<<"\n";
         Lista=Lista->Next;
+        i++;
     }
             cout<<"--------------------------------------------------------------- \n";
 
     cout<<endl;
+}
+
+void CancionesMasEscuchadas(PtrCanciones Lista){
+    PtrCanciones Ranking = NULL;
+    PtrCanciones Mayor;
+    int i=1;
+    while(i<=5){
+        Mayor = Lista;
+        PtrCanciones aux = Lista;
+        while(aux!=NULL){
+            if((aux->ContadorReproducciones >= Mayor->ContadorReproducciones) && (!ValidarCodigoCanciones(Ranking, aux->Identificador)))
+                Mayor=aux;
+            aux=aux->Next;
+        }
+        AgregarCancion(Ranking, CrearNodoCanciones(Mayor->Identificador,Mayor->NombreCancion,Mayor->Artista,Mayor->Genero,Mayor->Anio, Mayor->ContadorReproducciones, Mayor->ContadorLikes,0));
+        ContadorCanciones--;
+        Mayor->ContadorReproducciones = 0;
+        i++;
+    }
+    ImprimirListaCanciones(Ranking);
+    system("pause");
 }
 
 #endif

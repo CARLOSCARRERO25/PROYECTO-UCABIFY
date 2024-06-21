@@ -305,6 +305,54 @@ int main(){
             ArchivoMeterEnHistorial(ListaUsuarios);
             ArchivoMeterEnArchivoCanciones(ListaCanciones);
             break;
+        case 4:
+            do{
+                do{
+                    GenericMsg(11);
+                    cin>>ValidarOpcion;
+                    MsgdeError(1, ValidarOpcion);
+                }while(!EsNumero(ValidarOpcion));
+                //MsgdeError(4, ValidarOpcion);
+            }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>4);
+
+            switch (stoi(ValidarOpcion))
+            {
+            case 1:
+                CancionesMasEscuchadas(ListaCanciones);
+                break;
+            case 2:
+                do{
+                    do{
+                        ImprimirListaUsuarios(ListaUsuarios);
+                        cout<<">> ";
+                        cin>>Seleccion1;
+                        MsgdeError(1, Seleccion1);
+                    }while(!EsNumero(Seleccion1));
+                    MsgdeError(2, Seleccion1);
+                }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                CancionesMasEscuchadasUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
+                break;
+            case 3:
+
+                break;
+            case 4:
+                do{
+                    do{
+                        ImprimirListaUsuarios(ListaUsuarios);
+                        cout<<">> ";
+                        cin>>Seleccion1;
+                        MsgdeError(1, Seleccion1);
+                    }while(!EsNumero(Seleccion1));
+                    MsgdeError(2, Seleccion1);
+                }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                CancionesConlikesUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
+                break;
+            default:
+                break;
+            }
+            
+            
+            break;
         default:
             break;
         }
@@ -323,6 +371,7 @@ void GenericMsg(int A){
         cout<<"( 1 ) Gestion de usuarios\n";
         cout<<"( 2 ) Gestion de Canciones\n";
         cout<<"( 3 ) Escuchar Musica\n";
+        cout<<"( 4 ) Reportes\n";
         cout<<"( 0 ) SALIR\n";
         break;
     case 2:
@@ -374,6 +423,14 @@ void GenericMsg(int A){
         cout<<"( 1 ) Borrar un elemento del historial de un usuario\n";
         cout<<"( 2 ) Borrar todo el historial de un usuario\n";
         cout<<"( 3 ) Volver al menu anterior\n";
+        break;
+    case 11:
+        cout<<"\t\tMenu para gestionar los reportes\n\n";
+        cout<<"( 1 ) Top 5 canciones mas escuchadas en general\n";
+        cout<<"( 2 ) Top 5 canciones mas escuchadas por usuario\n";
+        cout<<"( 3 ) Top 3 Artistas mas escuchados\n";
+        cout<<"( 4 ) Canciones con Likes por Usuario\n";
+        cout<<">> ";
         break;
     default:
         break;

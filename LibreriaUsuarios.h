@@ -150,5 +150,40 @@ void ImprimirListaUsuarios(PtrUsuarios Lista){
         cout<<"------------------------------------------------------------------------------------ ";
     cout<<endl;
 }
+
+void CancionesMasEscuchadasUS(PtrCanciones Lista){
+    PtrCanciones Ranking = NULL;
+    PtrCanciones Mayor = Lista;
+    int i=1;
+    while(i<=5){
+        PtrCanciones aux = Lista;
+        while(aux!=NULL){
+            if((aux->ContadorReproducciones >= Mayor->ContadorReproducciones) && (!ValidarCodigoCanciones(Ranking, aux->Identificador)))
+                Mayor=aux;
+
+            aux=aux->Next;
+        }
+        AgregarCancion(Ranking, CrearNodoCanciones(Mayor->Identificador,Mayor->NombreCancion,Mayor->Artista,Mayor->Genero,Mayor->Anio, Mayor->ContadorReproducciones, Mayor->ContadorLikes,0));
+        Mayor->ContadorReproducciones=0;
+        ContadorCanciones--;
+        i++;
+    }
+    ImprimirListaCanciones(Ranking);
+    system("pause");
+}
+
+void CancionesConlikesUS(PtrCanciones Lista){
+    PtrCanciones Ranking = NULL;
+    PtrCanciones aux = Lista;
+        while(aux!=NULL){
+            if(aux->Like==1){
+                AgregarCancion(Ranking, CrearNodoCanciones(aux->Identificador,aux->NombreCancion,aux->Artista,aux->Genero,aux->Anio, aux->ContadorReproducciones, aux->ContadorLikes,0));
+                ContadorCanciones--;
+            }
+            aux=aux->Next;
+        }
+    ImprimirListaCanciones(Ranking);
+    system("pause");
+}
 #endif
 
