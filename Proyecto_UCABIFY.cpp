@@ -333,7 +333,7 @@ int main(){
                 CancionesMasEscuchadasUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
                 break;
             case 3:
-
+                    ArtistaMasEscuchado(ListaCanciones);
                 break;
             case 4:
                 do{

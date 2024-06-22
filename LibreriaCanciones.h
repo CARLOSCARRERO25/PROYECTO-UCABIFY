@@ -62,9 +62,25 @@ bool ValidarCodigoCanciones(PtrCanciones Lista, int Codigo){
     }
     return 0;
 }
+bool ValidarArtista(PtrCanciones Lista, string Nombre){
+    PtrCanciones aux = Lista;
+    while(aux!=NULL){
+        if(Nombre==aux->Artista)
+            return 1;
+        aux=aux->Next;
+    }
+    return 0;
+}
 
 PtrCanciones BuscarCancion(PtrCanciones Lista, int Posicion){
     PtrCanciones aux = Lista;
+    for(int i=1; i!=Posicion; i++)
+        aux=aux->Next;
+    return aux;
+}
+
+PtrCanciones BuscarArtista(PtrCanciones Lista, int Posicion){
+    PtrCanciones aux = Lista; 
     for(int i=1; i!=Posicion; i++)
         aux=aux->Next;
     return aux;
@@ -74,6 +90,16 @@ int BuscarPosicionDeCancion(PtrCanciones Lista, int Codigo){
     int i=1;
     PtrCanciones aux = Lista;
     while((aux->Identificador!= Codigo) && (aux->Next!=NULL)){
+        i++;
+        aux=aux->Next;
+    }
+    return i;
+}
+
+int BuscarPosicionDeArtista(PtrCanciones Lista, string Nombre){
+    int i=1;
+    PtrCanciones aux = Lista;
+    while((aux->Artista != Nombre) && (aux->Next!=NULL)){
         i++;
         aux=aux->Next;
     }
@@ -162,6 +188,53 @@ void CancionesMasEscuchadas(PtrCanciones Lista){
     }
     ImprimirListaCanciones(Ranking);
     system("pause");
+}
+
+void ArtistaMasEscuchado(PtrCanciones Lista){
+    PtrCanciones Artistas = NULL;
+    PtrCanciones Ranking = NULL;
+    PtrCanciones Mayor;
+    int i=1;
+
+        Mayor = Lista;
+        PtrCanciones aux = Lista;
+        while(aux!=NULL){
+            if(!ValidarArtista(Artistas,aux->Artista)){
+                AgregarCancion(Artistas, CrearNodoCanciones(aux->Identificador,aux->NombreCancion, aux->Artista,aux->Genero,aux->Anio,aux->ContadorReproducciones,aux->ContadorLikes,0));
+                ContadorCanciones--;
+            }else{
+                BuscarArtista(Artistas, BuscarPosicionDeArtista(Artistas, aux->Artista))->ContadorReproducciones+=aux->ContadorReproducciones;
+            }
+            aux=aux->Next;
+        }
+        ImprimirListaCanciones(Artistas);
+        system("pause");
+
+    while(i<=3){
+        Mayor = Lista;
+        PtrCanciones aux = Lista;
+        /*while(aux!=NULL){
+            if(!ValidarArtista(Artistas,aux->Artista)){
+                AgregarCancion(Artistas, CrearNodoCanciones(aux->Identificador,aux->NombreCancion, aux->Artista,aux->Genero,aux->Anio,aux->ContadorReproducciones,aux->ContadorLikes,0));
+                ContadorCanciones--;
+            }else{
+                BuscarArtista(Artistas, BuscarPosicionDeArtista(Artistas, aux->Artista))->ContadorReproducciones+=aux->ContadorReproducciones;
+            }
+        }*/
+
+
+        while(aux!=NULL){
+            if((aux->ContadorReproducciones >= Mayor->ContadorReproducciones) && (!ValidarCodigoCanciones(Ranking, aux->Identificador)))
+                Mayor=aux;
+            aux=aux->Next;
+        }
+        AgregarCancion(Ranking, CrearNodoCanciones(Mayor->Identificador,Mayor->NombreCancion,Mayor->Artista,Mayor->Genero,Mayor->Anio, Mayor->ContadorReproducciones, Mayor->ContadorLikes,0));
+        ContadorCanciones--;
+        Mayor->ContadorReproducciones = 0;
+        i++;
+    }
+    ImprimirListaCanciones(Ranking);
+    system("pause");        
 }
 
 #endif
