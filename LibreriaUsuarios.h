@@ -160,7 +160,6 @@ void CancionesMasEscuchadasUS(PtrCanciones Lista){
         while(aux!=NULL){
             if((aux->ContadorReproducciones >= Mayor->ContadorReproducciones) && (!ValidarCodigoCanciones(Ranking, aux->Identificador)))
                 Mayor=aux;
-
             aux=aux->Next;
         }
         AgregarCancion(Ranking, CrearNodoCanciones(Mayor->Identificador,Mayor->NombreCancion,Mayor->Artista,Mayor->Genero,Mayor->Anio, Mayor->ContadorReproducciones, Mayor->ContadorLikes,0));
@@ -169,7 +168,6 @@ void CancionesMasEscuchadasUS(PtrCanciones Lista){
         i++;
     }
     ImprimirListaCanciones(Ranking);
-    system("pause");
 }
 
 void CancionesConlikesUS(PtrCanciones Lista){
@@ -177,13 +175,12 @@ void CancionesConlikesUS(PtrCanciones Lista){
     PtrCanciones aux = Lista;
         while(aux!=NULL){
             if(aux->Like==1){
-                AgregarCancion(Ranking, CrearNodoCanciones(aux->Identificador,aux->NombreCancion,aux->Artista,aux->Genero,aux->Anio, aux->ContadorReproducciones, aux->ContadorLikes,0));
+                AgregarCancion(Ranking, CrearNodoCanciones(aux->Identificador,aux->NombreCancion,aux->Artista,aux->Genero,aux->Anio, aux->ContadorReproducciones, aux->ContadorLikes,1));
                 ContadorCanciones--;
             }
             aux=aux->Next;
         }
     ImprimirListaCanciones(Ranking);
-    system("pause");
 }
 #endif
 

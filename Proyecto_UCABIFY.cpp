@@ -318,7 +318,9 @@ int main(){
             switch (stoi(ValidarOpcion))
             {
             case 1:
+                system("cls");
                 CancionesMasEscuchadas(ListaCanciones);
+                system("pause");
                 break;
             case 2:
                 do{
@@ -330,10 +332,14 @@ int main(){
                     }while(!EsNumero(Seleccion1));
                     MsgdeError(2, Seleccion1);
                 }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                system("cls");
                 CancionesMasEscuchadasUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
+                system("pause");
                 break;
             case 3:
+                    system("cls");
                     ArtistaMasEscuchado(ListaCanciones);
+                    system("pause");
                 break;
             case 4:
                 do{
@@ -345,7 +351,9 @@ int main(){
                     }while(!EsNumero(Seleccion1));
                     MsgdeError(2, Seleccion1);
                 }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                system("cls");
                 CancionesConlikesUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
+                system("pause");
                 break;
             default:
                 break;
@@ -354,6 +362,7 @@ int main(){
             
             break;
         default:
+
             break;
         }
     }while(stoi(ValidarOpcion)!= 0);

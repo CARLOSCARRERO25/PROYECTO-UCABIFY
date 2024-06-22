@@ -150,7 +150,7 @@ void EliminarCancion(PtrCanciones &lista, int Posicion){
 void ImprimirListaCanciones(PtrCanciones Lista){
     cout<<"La lista de canciones de UCABIFY es: \n";
 
-    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t >Anio "<<endl;
+    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t >Anio \t Reproducciones \t Likes"<<endl;
     cout<<"--------------------------------------------------------------- \n";
     int i=1;
 
@@ -160,12 +160,32 @@ void ImprimirListaCanciones(PtrCanciones Lista){
         cout<<Lista->NombreCancion<<"\t";
         cout<<Lista->Artista<<"\t";
         cout<<Lista->Genero<<"\t";
-        cout<<Lista->Anio<<"\n";
+        cout<<Lista->Anio<<"\t";
+        cout<<Lista->ContadorReproducciones<<"\t";
+        cout<<Lista->ContadorLikes<<"\n";
         Lista=Lista->Next;
         i++;
     }
             cout<<"--------------------------------------------------------------- \n";
 
+    cout<<endl;
+}
+
+void ImprimirListaArtistas(PtrCanciones Lista){
+    cout<<"La lista de artistas mas escuchados de UCABIFY es: \n";
+
+    cout<<"# \t ARTISTA \t Reproducciones"<<endl;
+    cout<<"--------------------------------------------------------------- \n";
+    int i=1;
+
+    while(Lista!=NULL){
+        cout<<i<<" )\t";
+        cout<<Lista->Artista<<"\t";
+        cout<<Lista->ContadorReproducciones<<"\n";
+        Lista=Lista->Next;
+        i++;
+    }
+        cout<<"--------------------------------------------------------------- \n";
     cout<<endl;
 }
 
@@ -187,7 +207,6 @@ void CancionesMasEscuchadas(PtrCanciones Lista){
         i++;
     }
     ImprimirListaCanciones(Ranking);
-    system("pause");
 }
 
 void ArtistaMasEscuchado(PtrCanciones Lista){
@@ -207,21 +226,10 @@ void ArtistaMasEscuchado(PtrCanciones Lista){
             }
             aux=aux->Next;
         }
-        ImprimirListaCanciones(Artistas);
-        system("pause");
 
     while(i<=3){
         Mayor = Lista;
         PtrCanciones aux = Lista;
-        /*while(aux!=NULL){
-            if(!ValidarArtista(Artistas,aux->Artista)){
-                AgregarCancion(Artistas, CrearNodoCanciones(aux->Identificador,aux->NombreCancion, aux->Artista,aux->Genero,aux->Anio,aux->ContadorReproducciones,aux->ContadorLikes,0));
-                ContadorCanciones--;
-            }else{
-                BuscarArtista(Artistas, BuscarPosicionDeArtista(Artistas, aux->Artista))->ContadorReproducciones+=aux->ContadorReproducciones;
-            }
-        }*/
-
 
         while(aux!=NULL){
             if((aux->ContadorReproducciones >= Mayor->ContadorReproducciones) && (!ValidarCodigoCanciones(Ranking, aux->Identificador)))
@@ -230,11 +238,10 @@ void ArtistaMasEscuchado(PtrCanciones Lista){
         }
         AgregarCancion(Ranking, CrearNodoCanciones(Mayor->Identificador,Mayor->NombreCancion,Mayor->Artista,Mayor->Genero,Mayor->Anio, Mayor->ContadorReproducciones, Mayor->ContadorLikes,0));
         ContadorCanciones--;
-        Mayor->ContadorReproducciones = 0;
+        Mayor->ContadorReproducciones=0;
         i++;
     }
-    ImprimirListaCanciones(Ranking);
-    system("pause");        
+    ImprimirListaArtistas(Ranking);      
 }
 
 #endif
