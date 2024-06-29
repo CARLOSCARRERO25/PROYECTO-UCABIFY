@@ -46,6 +46,8 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
     ifstream archivo("CancionesArchivo.txt");
     
     while(getline(archivo,Linea)){
+        if(archivo.fail())
+            break;
         int i=0;
         Identificador=stoi(CopiarDato(Linea,i));
         NombreCancion = CopiarDato(Linea,i);
@@ -71,6 +73,8 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
     ifstream archivo("UsuarioArchivo.txt");
     
     while(getline(archivo,Linea)){
+        if(archivo.fail())
+            break;
         int i=0;
         CodigoIdentificador=stoi(CopiarDato(Linea,i));
         NombreUsuario= CopiarDato(Linea, i);
@@ -88,6 +92,8 @@ void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
     ifstream archivo("UsuarioHistorialArchivo.txt");
     string Linea; 
     while(getline(archivo, Linea)){
+        if(!Lista || !ListaCanciones)
+            break;
         int i =0;
         codigoUS=BuscarPosicionDeUsuario(Lista, stoi(CopiarDato(Linea, i)));
         while(i<Linea.size()){
@@ -105,7 +111,6 @@ void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
 void ArchivoMeterEnArchivoCanciones(PtrCanciones Lista){
     ofstream archivo;
     archivo.open("CancionesArchivo.txt",ios::out);
-
     while (Lista){
         archivo<<Lista->Identificador<<"\t";
         archivo<<Lista->NombreCancion<<"\t";
