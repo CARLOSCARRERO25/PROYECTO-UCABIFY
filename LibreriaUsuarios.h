@@ -189,11 +189,42 @@ void CancionesConlikesUS(PtrCanciones Lista){
     ImprimirListaCanciones(Ranking);
 }
 
-void CoincidenciaCanciones(){}
+//void CoincidenciaCanciones(){}
 
+PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios NodoUsuario){
+    PtrUsuarios AuxUsuario =ListaUsuarios;
+    PtrCanciones HistorialEmisor= ObtenerHistorialUsuario(NodoUsuario);
+    int Cuenta,CuentaAnt;
+    PtrUsuarios MayorCoincidencia;
+
+// !!! SHINSEN HAUDOKEN: OBTENER COINCIDENCIA ¡¡¡¡
+
+    while(AuxUsuario){
+        PtrCanciones AuxHistorial = ObtenerHistorialUsuario(AuxUsuario);
+        while(AuxHistorial){
+            while (HistorialEmisor){
+                if(NodoUsuario->CodigoIdentificador !=AuxUsuario->CodigoIdentificador)
+                    if (HistorialEmisor->Identificador==AuxHistorial->Identificador)
+                        Cuenta++;
+                HistorialEmisor=HistorialEmisor->Next;}
+            AuxHistorial=AuxHistorial->Next;}
+
+    if(Cuenta>CuentaAnt)
+        {MayorCoincidencia=AuxUsuario;
+        CuentaAnt=Cuenta;}
+
+    Cuenta=0;
+    AuxUsuario=AuxUsuario->Next;}
+
+    
+        return MayorCoincidencia;
+}
+
+//
 void CompatibilidadUsuarios(PtrUsuarios Lista){
     PtrUsuarios AuxUsuario= Lista;
     PtrUsuarios NodoUsuario=NULL;
+
     ImprimirListaUsuarios(AuxUsuario);
     int id;
 
@@ -202,7 +233,14 @@ void CompatibilidadUsuarios(PtrUsuarios Lista){
 
     NodoUsuario = BuscarUsuario(AuxUsuario,BuscarPosicionDeUsuario(AuxUsuario,id));
 
+    PtrUsuarios MayorCoincidencia=IteracionDeHistUsua(AuxUsuario,NodoUsuario);
 
+    if (MayorCoincidencia)
+    {
+        cout<<"MAYOR USUARIO COINCIDENTE: "<<MayorCoincidencia->NombreUsuario<<endl;
+    }
+    else
+        cout<<"TAS MAS SOLO Q ADAN EN EL DIA LAS MADRES XD"<<endl;
 
 }
 
