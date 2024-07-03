@@ -355,6 +355,11 @@ int main(){
                 CancionesConlikesUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
                 system("pause");
                 break;
+
+
+            case 5:  ;break;
+
+
             default:
                 break;
             }
@@ -439,6 +444,7 @@ void GenericMsg(int A){
         cout<<"( 2 ) Top 5 canciones mas escuchadas por usuario\n";
         cout<<"( 3 ) Top 3 Artistas mas escuchados\n";
         cout<<"( 4 ) Canciones con Likes por Usuario\n";
+        cout<<"( 5 )    COMPATIBILIDAD ENTRE USUARIOS\n";
         cout<<">> ";
         break;
     default:
