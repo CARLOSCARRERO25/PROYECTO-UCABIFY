@@ -357,7 +357,9 @@ int main(){
                 break;
 
 
-            case 5:  ;break;
+            case 5:
+                CompatibilidadUsuarios(ListaUsuarios);
+                break;
 
 
             default:
