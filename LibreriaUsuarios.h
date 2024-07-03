@@ -116,6 +116,7 @@ void EliminarUsuario(PtrUsuarios &Lista, int Posicion){// Funcion para eliminar 
     ContadorUsuarios--;
 }
 
+//RETORNA EL PUNTERO DE UN USUARIO EN X POSICION
 PtrUsuarios BuscarUsuario(PtrUsuarios &lista, int Posicion){
     PtrUsuarios aux = lista;
     for(int i=1; i!=Posicion; i++){
@@ -124,6 +125,7 @@ PtrUsuarios BuscarUsuario(PtrUsuarios &lista, int Posicion){
     return aux;
 }
 
+//RETORNA LA POSICION DEL USUARIO QUE BUSQUES (BUSQUEDAD POR IDENTIFICACION)
 int BuscarPosicionDeUsuario(PtrUsuarios Lista, int Codigo){
     int i=1;
     PtrUsuarios aux = Lista;
@@ -133,6 +135,10 @@ int BuscarPosicionDeUsuario(PtrUsuarios Lista, int Codigo){
     }
     return i;
 }
+//TA XD LAS FUNCIONES DE BUSQUEDAD, PARA ENCONTRAR UN USUARIO POR ID Y QUE TE RETORNE EL USUARIO (AMBAS SE LES PASA LA MISMA LISTA)
+//PRIMERO BUSCAR POSICION USUARIO, LUEGO BUSCAR USUARIO PASANDOLE LA POSICION DE BUSCAR POSICION 
+
+
 
 void ImprimirListaUsuarios(PtrUsuarios Lista){
     cout<<"La lista de usuarios de UCABIFY es: \n";
@@ -182,5 +188,24 @@ void CancionesConlikesUS(PtrCanciones Lista){
         }
     ImprimirListaCanciones(Ranking);
 }
+
+void CoincidenciaCanciones(){}
+
+void CompatibilidadUsuarios(PtrUsuarios Lista){
+    PtrUsuarios AuxUsuario= Lista;
+    PtrUsuarios NodoUsuario=NULL;
+    ImprimirListaUsuarios(AuxUsuario);
+    int id;
+
+    cout<<"INGRESE EL ID DEL USUARIO";
+    cin>>id;
+
+    NodoUsuario = BuscarUsuario(AuxUsuario,BuscarPosicionDeUsuario(AuxUsuario,id));
+
+
+
+}
+
+
 #endif
 
