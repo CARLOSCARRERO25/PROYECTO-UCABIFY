@@ -313,7 +313,7 @@ int main(){
                     MsgdeError(1, ValidarOpcion);
                 }while(!EsNumero(ValidarOpcion));
                 //MsgdeError(4, ValidarOpcion);
-            }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>4);
+            }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>5);
 
             switch (stoi(ValidarOpcion))
             {
@@ -356,9 +356,9 @@ int main(){
                 system("pause");
                 break;
 
-
             case 5:
                 CompatibilidadUsuarios(ListaUsuarios);
+                system("pause");
                 break;
 
 

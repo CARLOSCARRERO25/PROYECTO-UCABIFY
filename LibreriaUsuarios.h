@@ -190,6 +190,13 @@ void CancionesConlikesUS(PtrCanciones Lista){
 }
 
 //void CoincidenciaCanciones(){}
+PtrCanciones ObtenerHistorialUsuario(PtrUsuarios NodoUsuario){
+    PtrUsuarios AuxUsuario=NodoUsuario;
+    PtrCanciones HistorialUsuario= AuxUsuario->PtrHistorial;
+
+    return HistorialUsuario;
+}
+
 
 PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios NodoUsuario){
     PtrUsuarios AuxUsuario =ListaUsuarios;
