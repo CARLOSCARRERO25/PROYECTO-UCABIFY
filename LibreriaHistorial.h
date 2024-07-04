@@ -79,6 +79,11 @@ PtrCanciones BuscarHistorial(PtrUsuarios &ListaUsuarios,int PosicionUs,int Codig
     return Aux2;
 }
 
+PtrCanciones ObtenerHistorialUsuario(PtrUsuarios NodoUsuario){
+    PtrUsuarios AuxUsuario=NodoUsuario;
+    PtrCanciones HistorialUsuario= AuxUsuario->PtrHistorial;
 
+    return HistorialUsuario;
+}
 
 #endif
