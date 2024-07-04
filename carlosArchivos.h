@@ -42,6 +42,7 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
     int Anio;
     int ContadorReproducciones;
     int ContadorLikes;
+    string PruebaNUM;
     string Linea;
     ifstream archivo("CancionesArchivo.txt");
     
@@ -49,13 +50,38 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
         if(archivo.fail())
             break;
         int i=0;
-        Identificador=stoi(CopiarDato(Linea,i));
+        PruebaNUM = CopiarDato(Linea,i);
+        if(!EsNumero(PruebaNUM)){
+            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            delay(2);
+            break;
+        }
+        Identificador=stoi(PruebaNUM);
         NombreCancion = CopiarDato(Linea,i);
         Artista = CopiarDato(Linea,i);
         Genero = CopiarDato(Linea,i);
-        Anio = stoi(CopiarDato(Linea,i));
-        ContadorReproducciones = stoi(CopiarDato(Linea,i));
-        ContadorLikes = stoi(CopiarDato(Linea,i));
+        PruebaNUM = CopiarDato(Linea,i);
+        if(!EsNumero(PruebaNUM)){
+            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            delay(2);
+            break;
+        }
+        Anio = stoi(PruebaNUM);
+        PruebaNUM = CopiarDato(Linea,i);
+        if(!EsNumero(PruebaNUM)){
+            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            delay(2);
+            break;
+        }
+        ContadorReproducciones = stoi(PruebaNUM);
+        
+        PruebaNUM = CopiarDato(Linea,i);
+        if(!EsNumero(PruebaNUM)){
+            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            delay(2);
+            break;
+        }
+        ContadorLikes = stoi(PruebaNUM);
 
         AgregarCancion(Lista, CrearNodoCanciones(Identificador, NombreCancion, Artista, Genero, Anio,ContadorReproducciones, ContadorLikes,0));
     }
@@ -70,16 +96,29 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
     string Contrasena;
     string Pais;
     string Linea;
+    string PruebaNUM;
     ifstream archivo("UsuarioArchivo.txt");
     
     while(getline(archivo,Linea)){
         if(archivo.fail())
             break;
         int i=0;
-        CodigoIdentificador=stoi(CopiarDato(Linea,i));
+        PruebaNUM = CopiarDato(Linea,i);
+        if(!EsNumero(PruebaNUM)){
+            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            delay(2);
+            break;
+        }
+        CodigoIdentificador=stoi(PruebaNUM);
         NombreUsuario= CopiarDato(Linea, i);
         Correo= CopiarDato(Linea,i);
-        Edad=short(stoi(CopiarDato(Linea,i)));
+        PruebaNUM = CopiarDato(Linea,i);
+        if(!EsNumero(PruebaNUM)){
+            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            delay(2);
+            break;
+        }
+        Edad=short(stoi(PruebaNUM));
         Contrasena = CopiarDato(Linea,i);
         Pais= CopiarDato(Linea, i);
         AgregarUsuario(Lista, CrearNodoUsuarios(CodigoIdentificador,NombreUsuario, Correo, Edad,Contrasena,Pais));
