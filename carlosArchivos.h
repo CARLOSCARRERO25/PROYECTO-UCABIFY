@@ -105,7 +105,7 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
         int i=0;
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
-            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            cout<<"Hay un error en el archivo 'UsuarioArchivo.txt', se continuara con datos imcompletos";
             delay(2);
             break;
         }
@@ -114,7 +114,7 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
         Correo= CopiarDato(Linea,i);
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
-            cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
+            cout<<"Hay un error en el archivo 'UsuarioArchivo.txt', se continuara con datos imcompletos";
             delay(2);
             break;
         }
