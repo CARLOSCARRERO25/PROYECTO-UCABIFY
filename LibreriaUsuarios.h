@@ -209,9 +209,10 @@ PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios NodoUsuari
     while(AuxUsuario){
         PtrCanciones AuxHistorial = ObtenerHistorialUsuario(AuxUsuario);
         while(AuxHistorial){
+            HistorialEmisor= NodoUsuario->PtrHistorial;
             while (HistorialEmisor){
                 if(NodoUsuario->CodigoIdentificador !=AuxUsuario->CodigoIdentificador)
-                    if (HistorialEmisor->Identificador==AuxHistorial->Identificador)
+                    if (HistorialEmisor->Identificador==AuxHistorial->Identificador && (HistorialEmisor->Like ==1 && AuxHistorial->Like==1))
                         Cuenta++;
                 HistorialEmisor=HistorialEmisor->Next;}
             AuxHistorial=AuxHistorial->Next;}
@@ -235,16 +236,19 @@ void CompatibilidadUsuarios(PtrUsuarios Lista){
     ImprimirListaUsuarios(AuxUsuario);
     int id;
 
-    cout<<"INGRESE EL ID DEL USUARIO";
+    cout<<"INGRESE EL POSICION DEL USUARIO>> ";
     cin>>id;
 
-    NodoUsuario = BuscarUsuario(AuxUsuario,BuscarPosicionDeUsuario(AuxUsuario,id));
+    NodoUsuario = BuscarUsuario(AuxUsuario,id);
+
+   // NodoUsuario = BuscarUsuario(AuxUsuario,BuscarPosicionDeUsuario(AuxUsuario,id));
 
     PtrUsuarios MayorCoincidencia=IteracionDeHistUsua(AuxUsuario,NodoUsuario);
 
     if (MayorCoincidencia)
     {
-        cout<<"MAYOR USUARIO COINCIDENTE: "<<MayorCoincidencia->NombreUsuario<<endl;
+        int posicion =MayorCoincidencia->CodigoIdentificador - 20000;
+        cout<<"\n\nMAYOR USUARIO COINCIDENTE<< "<<posicion<<" >> "<<MayorCoincidencia->NombreUsuario<<" "<<endl;
     }
     else
         cout<<"TAS MAS SOLO Q ADAN EN EL DIA LAS MADRES XD"<<endl;
