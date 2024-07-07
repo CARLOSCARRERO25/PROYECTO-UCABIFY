@@ -200,28 +200,38 @@ PtrCanciones ObtenerHistorialUsuario(PtrUsuarios NodoUsuario){
 
 PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios NodoUsuario){
     PtrUsuarios AuxUsuario =ListaUsuarios;
-    PtrCanciones HistorialEmisor= ObtenerHistorialUsuario(NodoUsuario);
-    int Cuenta,CuentaAnt;
+    //PtrCanciones HistorialEmisor= ObtenerHistorialUsuario(NodoUsuario);
+    int Cuenta=0,CuentaAnt=0;
     PtrUsuarios MayorCoincidencia;
 
 // !!! SHINSEN HAUDOKEN: OBTENER COINCIDENCIA ¡¡¡¡
 
     while(AuxUsuario){
-        PtrCanciones AuxHistorial = ObtenerHistorialUsuario(AuxUsuario);
+        PtrCanciones AuxHistorial = NodoUsuario->PtrHistorial;
+        //cout<<"iteracion actual... "<<AuxUsuario->NombreUsuario<<endl;
         while(AuxHistorial){
-            HistorialEmisor= NodoUsuario->PtrHistorial;
+            PtrCanciones HistorialEmisor= NodoUsuario->PtrHistorial;
             while (HistorialEmisor){
+                //cout<<""<<endl;
                 if(NodoUsuario->CodigoIdentificador !=AuxUsuario->CodigoIdentificador)
                     if (HistorialEmisor->Identificador==AuxHistorial->Identificador && (HistorialEmisor->Like ==1 && AuxHistorial->Like==1))
-                        Cuenta++;
+                        {Cuenta++;
+                        cout<<"nombre de pepito... "<< NodoUsuario->NombreUsuario <<endl;
+                        cout<<"USUARIO..."<<AuxUsuario->NombreUsuario<<"|| cuenta coincidencia;"<<Cuenta<<endl<<endl;
+                        cout<<" ID cancion de pepito "<<HistorialEmisor->Identificador<<endl;
+                        cout<<" ID cancion del amigo "<<AuxHistorial->Identificador<<endl;
+                        cout<<"cancion de pepito "<<HistorialEmisor->NombreCancion<<endl;
+                        cout<<"cancion del amigo "<<AuxHistorial->NombreCancion<<endl;
+                        }
                 HistorialEmisor=HistorialEmisor->Next;}
             AuxHistorial=AuxHistorial->Next;}
 
     if(Cuenta>CuentaAnt)
         {MayorCoincidencia=AuxUsuario;
         CuentaAnt=Cuenta;}
-
+        cout<<" mayor coincidencia temporal... "<< MayorCoincidencia->NombreUsuario <<endl<<endl<<endl;
     Cuenta=0;
+
     AuxUsuario=AuxUsuario->Next;}
 
     
@@ -241,7 +251,10 @@ void CompatibilidadUsuarios(PtrUsuarios Lista){
 
     NodoUsuario = BuscarUsuario(AuxUsuario,id);
 
-   // NodoUsuario = BuscarUsuario(AuxUsuario,BuscarPosicionDeUsuario(AuxUsuario,id));
+    cout<<" nombre ..."<<NodoUsuario->NombreUsuario<<endl;
+    
+    system("PAUSE");
+
 
     PtrUsuarios MayorCoincidencia=IteracionDeHistUsua(AuxUsuario,NodoUsuario);
 
@@ -257,4 +270,3 @@ void CompatibilidadUsuarios(PtrUsuarios Lista){
 
 
 #endif
-
