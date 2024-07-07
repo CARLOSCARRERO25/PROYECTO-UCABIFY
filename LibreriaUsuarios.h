@@ -198,7 +198,7 @@ PtrCanciones ObtenerHistorialUsuario(PtrUsuarios NodoUsuario){
 }
 
 
-PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios NodoUsuario){
+PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios CompatibilidadUS){
     PtrUsuarios AuxUsuario =ListaUsuarios;
     //PtrCanciones HistorialEmisor= ObtenerHistorialUsuario(NodoUsuario);
     int Cuenta=0,CuentaAnt=0;
@@ -207,16 +207,16 @@ PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios NodoUsuari
 // !!! SHINSEN HAUDOKEN: OBTENER COINCIDENCIA ¡¡¡¡
 
     while(AuxUsuario){
-        PtrCanciones AuxHistorial = NodoUsuario->PtrHistorial;
+        PtrCanciones AuxHistorial = CompatibilidadUS->PtrHistorial;
         //cout<<"iteracion actual... "<<AuxUsuario->NombreUsuario<<endl;
         while(AuxHistorial){
-            PtrCanciones HistorialEmisor= NodoUsuario->PtrHistorial;
+            PtrCanciones HistorialEmisor= CompatibilidadUS->PtrHistorial;
             while (HistorialEmisor){
                 //cout<<""<<endl;
-                if(NodoUsuario->CodigoIdentificador !=AuxUsuario->CodigoIdentificador)
+                if(CompatibilidadUS->CodigoIdentificador !=AuxUsuario->CodigoIdentificador)
                     if (HistorialEmisor->Identificador==AuxHistorial->Identificador && (HistorialEmisor->Like ==1 && AuxHistorial->Like==1))
                         {Cuenta++;
-                        cout<<"nombre de pepito... "<< NodoUsuario->NombreUsuario <<endl;
+                        cout<<"nombre de pepito... "<< CompatibilidadUS->NombreUsuario <<endl;
                         cout<<"USUARIO..."<<AuxUsuario->NombreUsuario<<"|| cuenta coincidencia;"<<Cuenta<<endl<<endl;
                         cout<<" ID cancion de pepito "<<HistorialEmisor->Identificador<<endl;
                         cout<<" ID cancion del amigo "<<AuxHistorial->Identificador<<endl;
@@ -236,6 +236,41 @@ PtrUsuarios IteracionDeHistUsua(PtrUsuarios ListaUsuarios,PtrUsuarios NodoUsuari
 
     
         return MayorCoincidencia;
+}
+
+PtrUsuarios Compatibilidad(PtrUsuarios Lista, int PosicionUsuario){
+    PtrUsuarios CompatibilidadUS = BuscarUsuario(Lista, PosicionUsuario);
+    PtrUsuarios AuxListaUsuarios = Lista;
+    PtrUsuarios MayorCoincidencia;
+    int Cuenta=0, CuentaAnterior=0;
+
+    while(AuxListaUsuarios!=NULL){
+        if(AuxListaUsuarios->CodigoIdentificador == CompatibilidadUS->CodigoIdentificador){
+            if(AuxListaUsuarios->Next==NULL)
+                break;
+            AuxListaUsuarios= AuxListaUsuarios->Next;
+        }
+        PtrCanciones HistorialCompUS = CompatibilidadUS->PtrHistorial; //Apuntador auxiliar al inicio del Historial del usuario al cual se le busca su compatible
+        while(HistorialCompUS!=NULL){
+            PtrCanciones HistorialUsActual = AuxListaUsuarios->PtrHistorial; //Apuntador al inicio del historial del usuario actual
+            while(HistorialUsActual!=NULL){
+                if((HistorialCompUS->Identificador == HistorialUsActual->Identificador) && ((HistorialCompUS->Like==1) && (HistorialUsActual->Like==1))){
+                    Cuenta++;
+                    break;
+                }
+                HistorialUsActual=HistorialUsActual->Next;
+            }
+            HistorialCompUS=HistorialCompUS->Next;
+        }
+        
+        if(Cuenta>CuentaAnterior){
+            MayorCoincidencia = AuxListaUsuarios;
+            CuentaAnterior = Cuenta;
+            Cuenta = 0;
+        }
+        AuxListaUsuarios=AuxListaUsuarios->Next;
+    }
+    return MayorCoincidencia;
 }
 
 //

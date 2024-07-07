@@ -357,7 +357,18 @@ int main(){
                 break;
 
             case 5:
-                CompatibilidadUsuarios(ListaUsuarios);
+                //CompatibilidadUsuarios(ListaUsuarios);
+                do{
+                    do{
+                        ImprimirListaUsuarios(ListaUsuarios);
+                        cout<<">> ";
+                        cin>>Seleccion1;
+                        MsgdeError(1, Seleccion1);
+                    }while(!EsNumero(Seleccion1));
+                    MsgdeError(2, Seleccion1);
+                }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+
+                cout<<"El usuario mas compatible con "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<" es: "<<Compatibilidad(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<endl;
                 system("pause");
                 break;
 
