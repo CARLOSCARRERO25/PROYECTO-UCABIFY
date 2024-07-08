@@ -371,13 +371,14 @@ int main(){
                 cout<<"El usuario mas compatible con "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<" es: "<<Compatibilidad(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<endl;
                 system("pause");
                 break;
-
-
             default:
                 break;
             }
-            
-            
+            break;
+        case 0:
+            cout<<"MUCHAS GRACIAS POR USAR UCABIFY! VUELVA PRONTO."<<endl;
+            delay(2);
+            system("cls");
             break;
         default:
 
@@ -452,12 +453,13 @@ void GenericMsg(int A){
         cout<<"( 3 ) Volver al menu anterior\n";
         break;
     case 11:
+        system("cls");
         cout<<"\t\tMenu para gestionar los reportes\n\n";
         cout<<"( 1 ) Top 5 canciones mas escuchadas en general\n";
         cout<<"( 2 ) Top 5 canciones mas escuchadas por usuario\n";
         cout<<"( 3 ) Top 3 Artistas mas escuchados\n";
         cout<<"( 4 ) Canciones con Likes por Usuario\n";
-        cout<<"( 5 )    COMPATIBILIDAD ENTRE USUARIOS\n";
+        cout<<"( 5 ) Compatibilidad entre usuarios\n";
         cout<<">> ";
         break;
     default:

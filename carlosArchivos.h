@@ -127,7 +127,7 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
 }
 
 void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
-    int codigoUS, CodigoCan,Reproduccion, like;
+    int codigoUS, CodigoCan,Reproduccion, like, ValidarCancion;
     ifstream archivo("UsuarioHistorialArchivo.txt");
     string Linea; 
     while(getline(archivo, Linea)){
@@ -137,10 +137,13 @@ void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
         codigoUS=BuscarPosicionDeUsuario(Lista, stoi(CopiarDato(Linea, i)));
         while(i<Linea.size()){
             if(i!=Linea.size()){
-                CodigoCan = BuscarPosicionDeCancion(ListaCanciones, stoi(CopiarDato(Linea, i)));
-                like= stoi(CopiarDato(Linea, i));
-                Reproduccion = stoi(CopiarDato(Linea,i));
-                AgregarHistorial(Lista, ListaCanciones,codigoUS, CodigoCan,Reproduccion,like);
+                ValidarCancion = stoi(CopiarDato(Linea, i));
+                if(ValidarCodigoCanciones(ListaCanciones, ValidarCancion)){
+                    CodigoCan = BuscarPosicionDeCancion(ListaCanciones, ValidarCancion);
+                    like= stoi(CopiarDato(Linea, i));
+                    Reproduccion = stoi(CopiarDato(Linea,i));
+                    AgregarHistorial(Lista, ListaCanciones,codigoUS, CodigoCan,Reproduccion,like);
+                }
             }
         }
     }
