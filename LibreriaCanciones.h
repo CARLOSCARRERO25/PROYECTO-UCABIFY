@@ -148,9 +148,7 @@ void EliminarCancion(PtrCanciones &lista, int Posicion){
 }
 
 void ImprimirListaCanciones(PtrCanciones Lista){
-    cout<<"La lista de canciones de UCABIFY es: \n";
-
-    cout<<" ID \t NOMBRE \t ARTISTA \t GENERO \t >Anio \t Reproducciones \t Likes"<<endl;
+    cout<<"#\t ID \t NOMBRE \t ARTISTA \t GENERO \t Anio \t Reproducciones \t Likes"<<endl;
     cout<<"--------------------------------------------------------------- \n";
     int i=1;
 
@@ -206,6 +204,7 @@ void CancionesMasEscuchadas(PtrCanciones Lista){
         Mayor->ContadorReproducciones = 0;
         i++;
     }
+    cout<<"Top 5 canciones mas escuchadas de UCABIFY: \n";
     ImprimirListaCanciones(Ranking);
 }
 

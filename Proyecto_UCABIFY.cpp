@@ -43,6 +43,7 @@ int main(){
                 switch (stoi(ValidarOpcion))
                 {
                 case 1: //Agregar Usuarios (Faltan validaciones y generar el codigo aleatorio)
+                    system("cls");
                     Datos = SolicitarDatos();
                     do{
                         Codigo = GenerarCodigo();
@@ -89,6 +90,7 @@ int main(){
                             }else{
                                 do{
                                     do{  // IMPRIMIR HISTORIAL DE USUARIO SELECCIONADO
+                                        system("cls");
                                         cout<<"Seleccione el usuario al cual desea revisarle el historial:\n";
                                         ImprimirListaUsuarios(ListaUsuarios);
                                         cout<<">> ";
@@ -102,6 +104,7 @@ int main(){
                                     cout<<"El historial de este usuario esta vacio\n";
                                     delay(2);
                                 }else{
+                                    system("cls");
                                     ImprimirHistorial(ListaUsuarios, stoi(ValidarOpcion));
                                     system("pause");   
                                 }
@@ -119,6 +122,7 @@ int main(){
                             {
                             case 1:
                                 do{//SELECCION 1 es el usuario buscado
+                                    system("cls");
                                     cout<<"Seleccione el usuario al cual le desea eliminar un dato del historial\n";
                                     ImprimirListaUsuarios(ListaUsuarios);
                                     cout<<">> ";
@@ -127,6 +131,7 @@ int main(){
                                 }while(!EsNumero(Seleccion1));
                 
                                 do{//SELECCION 2 ES LA CANCION QUE VOY A ELIMINAR
+                                    system("cls");
                                     cout<<"Seleccione el dato que desea eliminar del usuario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<"\n";
                                     ImprimirHistorial(ListaUsuarios, stoi(Seleccion1));
                                     cout<<">> ";
@@ -140,6 +145,7 @@ int main(){
                                 break;
                             case 2:
                                 do{//SELECCIONE UN USUARIO ELIMINA SU HISTORIAL COMPLETO (SELECCION)
+                                    system("cls");
                                     cout<<"Seleccione el usuario al cual le desea eliminar un dato del historial\n";
                                     ImprimirListaUsuarios(ListaUsuarios);
                                     cout<<">> ";
@@ -164,6 +170,8 @@ int main(){
                     if(ListaUsuarios==NULL)
                         cout<<"la lista esta vacia\n";
                     else
+                        system("cls");
+                        cout<<"La lista de usuarios de UCABIFY es: \n";
                         ImprimirListaUsuarios(ListaUsuarios);
                     system("pause");
                     break;
@@ -185,6 +193,7 @@ int main(){
                 switch (stoi(ValidarOpcion))
                 {
                 case 1: //Agregar canciones (faltan validaciones y generar el codigo identificador)
+                    system("cls");
                     DatosCanciones = SolicitarDatosCanciones();
                     do{
                         Codigo = GenerarCodigo();
@@ -200,6 +209,7 @@ int main(){
                     }else{
                         do{
                             do{
+                                GenericMsg(14);
                                 ImprimirListaCanciones(ListaCanciones);
                                 cout<<"Ingrese el N° de la cancion que desea eliminar\n";
                                 cout<<">> ";
@@ -207,7 +217,6 @@ int main(){
                                 MsgdeError(1, ValidarOpcion);
                             }while(!EsNumero(ValidarOpcion));
                         }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>ContadorCanciones);
-                        
                         EliminarCancion(ListaCanciones, stoi(ValidarOpcion));
                         ArchivoMeterEnArchivoCanciones(ListaCanciones);
                     }
@@ -216,7 +225,7 @@ int main(){
                     if(ListaCanciones==NULL){
                         cout<<"La lista esta vacia\n";
                     }else{
-                        cout<<"La lista de canciones en UCABIFY es:\n";
+                        GenericMsg(14);
                         ImprimirListaCanciones(ListaCanciones);
                     }
                     system("pause");
@@ -227,153 +236,183 @@ int main(){
             }while(stoi(ValidarOpcion)!=4);
             break;
         case 3: //Reproducir canciones
-            if((ListaCanciones==NULL) && (ListaUsuarios==NULL)){
-                GenericMsg(5);
-                GenericMsg(8);
-                break;
-            }else{
-                if(ListaCanciones == NULL){
-                    GenericMsg(6);
-                    GenericMsg(8);
-                    break;
-                }
-
-                if(ListaUsuarios==NULL){
-                    GenericMsg(7);
-                    GenericMsg(8);
-                    break;
-                }
-            }
-
             do{
                 do{
-                    GenericMsg(4);
-                    ImprimirListaUsuarios(ListaUsuarios);
-                    cout<<">> ";
-                    cin>>Seleccion1;
-                    MsgdeError(1, Seleccion1);
-                }while(!EsNumero(Seleccion1));
-                MsgdeError(2, Seleccion1);
-            }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
-
-            do{
-                do{
-                    ImprimirListaCanciones(ListaCanciones);
-                    cout<<">> ";
-                    cin>>Seleccion2;
-                    MsgdeError(1, Seleccion2);
-                }while(!EsNumero(Seleccion2));
-                MsgdeError(3, Seleccion2);
-            }while((stoi(Seleccion2)<=0) || (stoi(Seleccion2)>ContadorCanciones));
-
-            Codigo = BuscarCancion(ListaCanciones, stoi(Seleccion2))->Identificador;
-
-            if(!EncontrarElementoHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)){
-                AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2),0,0);
-            }
-            
-            BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->ContadorReproducciones++;
-
-            do{
-                do{
-                    if(BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like==0){
-                        cout<<"Que tal te pareci"<<char(162)<<" la cancion? Quisieras darle like?\n";
-                        cout<<"( 1 ) Dar Like\n";
-                        cout<<"( 2 ) No dar like\n";
-                    }else{
-                        cout<<"Que tal te pareci"<<char(162)<<" la cancion? Quisiera mantener su like?\n";
-                        cout<<"( 1 ) Mantener like\n";
-                        cout<<"( 2 ) Quitar Like\n";
-                    }
-                    cout<<">> ";
+                    GenericMsg(12);
                     cin>>ValidarOpcion;
                     MsgdeError(1, ValidarOpcion);
                 }while(!EsNumero(ValidarOpcion));
-                MsgdeError(4, ValidarOpcion);
-            }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>2);
 
-            if(stoi(ValidarOpcion)==1){
-                BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like=1;
-                BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes++;
-            }else{
-                BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like=0;
-                if(BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes>0)
+                if(stoi(ValidarOpcion)==1){
+                    if((ListaCanciones==NULL) && (ListaUsuarios==NULL)){
+                        GenericMsg(5);
+                        GenericMsg(8);
+                        break;
+                    }else{
+                    if(ListaCanciones == NULL){
+                        GenericMsg(6);
+                        GenericMsg(8);
+                        break;
+                    }
+
+                    if(ListaUsuarios==NULL){
+                        GenericMsg(7);
+                        GenericMsg(8);
+                        break;
+                    }
+                }
+
+                do{
+                    do{
+                        GenericMsg(4);
+                        ImprimirListaUsuarios(ListaUsuarios);
+                        cout<<">> ";
+                        cin>>Seleccion1;
+                        MsgdeError(1, Seleccion1);
+                    }while(!EsNumero(Seleccion1));
+                    MsgdeError(2, Seleccion1);
+                }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+
+                do{
+                    do{
+                        GenericMsg(14);
+                        ImprimirListaCanciones(ListaCanciones);
+                        cout<<">> ";
+                        cin>>Seleccion2;
+                        MsgdeError(1, Seleccion2);
+                    }while(!EsNumero(Seleccion2));
+                    MsgdeError(3, Seleccion2);
+                }while((stoi(Seleccion2)<=0) || (stoi(Seleccion2)>ContadorCanciones));
+
+                Codigo = BuscarCancion(ListaCanciones, stoi(Seleccion2))->Identificador;
+
+                if(!EncontrarElementoHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)){
+                    AgregarHistorial(ListaUsuarios, ListaCanciones,stoi(Seleccion1), stoi(Seleccion2),0,0);
+                }
+            
+                BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->ContadorReproducciones++;
+
+                do{
+                    do{
+                        if(BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like==0){
+                            cout<<"Que tal te pareci"<<char(162)<<" la cancion? Quisieras darle like?\n";
+                            cout<<"( 1 ) Dar Like\n";
+                            cout<<"( 2 ) No dar like\n";
+                        }else{
+                            cout<<"Que tal te pareci"<<char(162)<<" la cancion? Quisiera mantener su like?\n";
+                            cout<<"( 1 ) Mantener like\n";
+                            cout<<"( 2 ) Quitar Like\n";
+                        }
+                        cout<<">> ";
+                        cin>>ValidarOpcion;
+                        MsgdeError(1, ValidarOpcion);
+                    }while(!EsNumero(ValidarOpcion));
+                    MsgdeError(4, ValidarOpcion);
+                }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>2);
+
+                if(stoi(ValidarOpcion)==1){
+                    BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like=1;
+                    BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes++;
+                }else{
+                    BuscarHistorial(ListaUsuarios, stoi(Seleccion1), Codigo)->Like=0;
+                    if(BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes>0)
                     BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorLikes--;
-            }
+                }
 
-            BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorReproducciones++;
-            ArchivoMeterEnHistorial(ListaUsuarios);
-            ArchivoMeterEnArchivoCanciones(ListaCanciones);
+                BuscarCancion(ListaCanciones, stoi(Seleccion2))->ContadorReproducciones++;
+                ArchivoMeterEnHistorial(ListaUsuarios);
+                ArchivoMeterEnArchivoCanciones(ListaCanciones);
+                }
+            }while(stoi(ValidarOpcion)!=2);
             break;
         case 4:
             do{
                 do{
-                    GenericMsg(11);
-                    cin>>ValidarOpcion;
-                    MsgdeError(1, ValidarOpcion);
-                }while(!EsNumero(ValidarOpcion));
+                    do{
+                        GenericMsg(11);
+                        cin>>ValidarOpcion;
+                        MsgdeError(1, ValidarOpcion);
+                    }while(!EsNumero(ValidarOpcion));
                 //MsgdeError(4, ValidarOpcion);
-            }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>5);
+                }while(stoi(ValidarOpcion)<=0 || stoi(ValidarOpcion)>6);
 
             switch (stoi(ValidarOpcion))
             {
-            case 1:
-                system("cls");
-                CancionesMasEscuchadas(ListaCanciones);
-                system("pause");
-                break;
-            case 2:
-                do{
+                case 1:
+                    system("cls");
+                    CancionesMasEscuchadas(ListaCanciones);
+                    system("pause");
+                    break;
+                case 2:
                     do{
-                        ImprimirListaUsuarios(ListaUsuarios);
-                        cout<<">> ";
-                        cin>>Seleccion1;
-                        MsgdeError(1, Seleccion1);
-                    }while(!EsNumero(Seleccion1));
-                    MsgdeError(2, Seleccion1);
-                }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
-                system("cls");
-                CancionesMasEscuchadasUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
-                system("pause");
-                break;
-            case 3:
+                        do{
+                            system("cls");
+                            cout<<"Lista de usuarios de UCABIFY: \n";
+                            ImprimirListaUsuarios(ListaUsuarios);
+                            cout<<">> ";
+                            cin>>Seleccion1;
+                            MsgdeError(1, Seleccion1);
+                        }while(!EsNumero(Seleccion1));
+                        MsgdeError(2, Seleccion1);
+                    }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                    system("cls");
+                    cout<<"La canciones mas escuchadas del usuario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<" son:\n";
+                    CancionesMasEscuchadasUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
+                    system("pause");
+                    break;
+                case 3:
                     system("cls");
                     ArtistaMasEscuchado(ListaCanciones);
                     system("pause");
-                break;
-            case 4:
-                do{
+                    break;
+                case 4:
                     do{
-                        ImprimirListaUsuarios(ListaUsuarios);
-                        cout<<">> ";
-                        cin>>Seleccion1;
-                        MsgdeError(1, Seleccion1);
-                    }while(!EsNumero(Seleccion1));
-                    MsgdeError(2, Seleccion1);
-                }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
-                system("cls");
-                CancionesConlikesUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
-                system("pause");
-                break;
+                        do{
+                            system("cls");
+                            cout<<"Seleccione el usuario al cual desee conocer sus canciones con likes:\n";
+                            ImprimirListaUsuarios(ListaUsuarios);
+                            cout<<">> ";
+                            cin>>Seleccion1;
+                            MsgdeError(1, Seleccion1);
+                        }while(!EsNumero(Seleccion1));
+                        MsgdeError(2, Seleccion1);
+                    }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                    system("cls");
+                    cout<<"Las canciones con likes del likes del usario "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<" son: \n";
+                    CancionesConlikesUS(BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->PtrHistorial);
+                    system("pause");
+                    break;
 
-            case 5:
-                //CompatibilidadUsuarios(ListaUsuarios);
-                do{
+                case 5:
+                    //CompatibilidadUsuarios(ListaUsuarios);
                     do{
-                        ImprimirListaUsuarios(ListaUsuarios);
-                        cout<<">> ";
-                        cin>>Seleccion1;
-                        MsgdeError(1, Seleccion1);
-                    }while(!EsNumero(Seleccion1));
-                    MsgdeError(2, Seleccion1);
-                }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                        do{
+                            GenericMsg(13);
+                            cin>>ValidarOpcion;
+                            MsgdeError(1, ValidarOpcion);
+                        }while(!EsNumero(ValidarOpcion));
 
-                cout<<"El usuario mas compatible con "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<" es: "<<Compatibilidad(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<endl;
-                system("pause");
-                break;
-            default:
-                break;
+                        if(stoi(ValidarOpcion)==1){
+                            do{
+                                do{
+                                    system("cls");
+                                    cout<<"Seleccione el usuario al que desea conocer sus compatibilidad: \n";
+                                    ImprimirListaUsuarios(ListaUsuarios);
+                                    cout<<">> ";
+                                    cin>>Seleccion1;
+                                    MsgdeError(1, Seleccion1);
+                                }while(!EsNumero(Seleccion1));
+                                MsgdeError(2, Seleccion1);
+                            }while(stoi(Seleccion1)<=0 || stoi(Seleccion1)>ContadorUsuarios);
+                            cout<<"El usuario mas compatible con "<<BuscarUsuario(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<" es: "<<Compatibilidad(ListaUsuarios, stoi(Seleccion1))->NombreUsuario<<endl;
+                            system("pause");
+                        }
+                    }while(stoi(ValidarOpcion)!= 2);
+                    break;
+                default:
+                    break;
             }
+        }while(stoi(ValidarOpcion)!=6);
             break;
         case 0:
             cout<<"MUCHAS GRACIAS POR USAR UCABIFY! VUELVA PRONTO."<<endl;
@@ -398,7 +437,7 @@ void GenericMsg(int A){
         cout<<"\t\t MENU PRINCIPAL\n\n";
         cout<<"( 1 ) Gestion de usuarios\n";
         cout<<"( 2 ) Gestion de Canciones\n";
-        cout<<"( 3 ) Escuchar Musica\n";
+        cout<<"( 3 ) Reproductor de Musica\n";
         cout<<"( 4 ) Reportes\n";
         cout<<"( 0 ) SALIR\n";
         break;
@@ -460,7 +499,26 @@ void GenericMsg(int A){
         cout<<"( 3 ) Top 3 Artistas mas escuchados\n";
         cout<<"( 4 ) Canciones con Likes por Usuario\n";
         cout<<"( 5 ) Compatibilidad entre usuarios\n";
+        cout<<"( 6 ) Volver al menu anterior\n";
         cout<<">> ";
+        break;
+    case 12:
+        system("cls");
+        cout<<"\t\tMenu para el reproductor\n\n";
+        cout<<"( 1 ) Reproducir Cancion\n";
+        cout<<"( 2 ) Volver al menu anterior\n";
+        cout<<">> ";
+        break;
+    case 13:
+        system("cls");
+        cout<<"\t\tMenu para la compatibilidad entre usuarios\n\n";
+        cout<<"( 1 ) Buscar compatibilidad entre usuarios\n";
+        cout<<"( 2 ) Volver al menu anterior\n";
+        cout<<">> ";
+        break;
+    case 14:
+        system("cls");
+        cout<<"La lista de canciones de UCABIFY es: \n";
         break;
     default:
         break;

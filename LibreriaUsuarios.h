@@ -141,7 +141,7 @@ int BuscarPosicionDeUsuario(PtrUsuarios Lista, int Codigo){
 
 
 void ImprimirListaUsuarios(PtrUsuarios Lista){
-    cout<<"La lista de usuarios de UCABIFY es: \n";
+    cout<<"#\t ID \t NOMBRE \t CORREO \t CONTRASENA \t EDAD \t PAIS"<<endl;
     cout<<"------------------------------------------------------------------------------------ \n";
     for(int i=1; i<=ContadorUsuarios; i++){
         cout<<i<<" )\t";

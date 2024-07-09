@@ -53,7 +53,7 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
             cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
-            delay(2);
+            delay(3);
             break;
         }
         Identificador=stoi(PruebaNUM);
@@ -63,14 +63,14 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
             cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
-            delay(2);
+            delay(3);
             break;
         }
         Anio = stoi(PruebaNUM);
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
             cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
-            delay(2);
+            delay(3);
             break;
         }
         ContadorReproducciones = stoi(PruebaNUM);
@@ -78,7 +78,7 @@ void CargarArchivoCanciones(PtrCanciones &Lista){
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
             cout<<"Hay un error en el archivo 'CancionesArchivo.txt', se continuara con datos imcompletos";
-            delay(2);
+            delay(3);
             break;
         }
         ContadorLikes = stoi(PruebaNUM);
@@ -106,7 +106,7 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
             cout<<"Hay un error en el archivo 'UsuarioArchivo.txt', se continuara con datos imcompletos";
-            delay(2);
+            delay(3);
             break;
         }
         CodigoIdentificador=stoi(PruebaNUM);
@@ -115,7 +115,7 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
         PruebaNUM = CopiarDato(Linea,i);
         if(!EsNumero(PruebaNUM)){
             cout<<"Hay un error en el archivo 'UsuarioArchivo.txt', se continuara con datos imcompletos";
-            delay(2);
+            delay(3);
             break;
         }
         Edad=short(stoi(PruebaNUM));
@@ -127,22 +127,25 @@ void CargarArchivoUsuarios(PtrUsuarios &Lista){
 }
 
 void CargarArchivoHistorial(PtrUsuarios &Lista, PtrCanciones ListaCanciones){
-    int codigoUS, CodigoCan,Reproduccion, like, ValidarCancion;
+    int codigoUS, CodigoCan,Reproduccion, like, Validar;
     ifstream archivo("UsuarioHistorialArchivo.txt");
     string Linea; 
     while(getline(archivo, Linea)){
         if(!Lista || !ListaCanciones)
             break;
         int i =0;
-        codigoUS=BuscarPosicionDeUsuario(Lista, stoi(CopiarDato(Linea, i)));
-        while(i<Linea.size()){
-            if(i!=Linea.size()){
-                ValidarCancion = stoi(CopiarDato(Linea, i));
-                if(ValidarCodigoCanciones(ListaCanciones, ValidarCancion)){
-                    CodigoCan = BuscarPosicionDeCancion(ListaCanciones, ValidarCancion);
-                    like= stoi(CopiarDato(Linea, i));
-                    Reproduccion = stoi(CopiarDato(Linea,i));
-                    AgregarHistorial(Lista, ListaCanciones,codigoUS, CodigoCan,Reproduccion,like);
+        Validar = stoi(CopiarDato(Linea, i));
+        if(ValidarCodigoUs(Lista, Validar)){
+            codigoUS=BuscarPosicionDeUsuario(Lista,Validar);
+            while(i<Linea.size()){
+                if(i!=Linea.size()){
+                    Validar = stoi(CopiarDato(Linea, i));
+                    if(ValidarCodigoCanciones(ListaCanciones, Validar)){
+                        CodigoCan = BuscarPosicionDeCancion(ListaCanciones, Validar);
+                        like= stoi(CopiarDato(Linea, i));
+                        Reproduccion = stoi(CopiarDato(Linea,i));
+                        AgregarHistorial(Lista, ListaCanciones,codigoUS, CodigoCan,Reproduccion,like);
+                    }
                 }
             }
         }
